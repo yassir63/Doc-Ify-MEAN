@@ -1,0 +1,188 @@
+
+<body class="">
+
+  <div class="container">
+
+  <div class="row">
+    <div class="col s12 mt-3 mb-3">
+
+      <div class="card bg-dark">
+        <div class="car-content py-0 bg-dark black-text">
+          <div class="row bg-dark ">
+
+            <div *ngIf="!view" class="col s6 mx-3 mt-4 shadow p-2 bg-dark rounded d-flex justify-content-center text-center">
+
+
+
+              <form [formGroup]="articleForm">
+
+<div class="d-flex" *ngFor="let control of articleForm.controls.Field['controls']; let i=index;" formArrayName="Field">
+
+<!-- mandatory to have a in the following line [formGroupName]="i" or else it won t work ! -->
+<div [formGroupName]="i">
+<div [ngStyle]="{'visibility' : !show ? ' visible' : 'hidden'}" class="form mt-2 mx-2 mb-2" >
+
+  <!-- <input class="form__input" type="hidden" value="{{id}}" formControlName="id"/> -->
+
+<input class="form__input" type="hidden" value="" formControlName="label"/>
+<input class="form__input" type="hidden" value="free" formControlName="type"/>
+
+
+<!-- [(ngModel)]="company_name" -->
+<input class="form__input" type="{{types[i]}}"  formControlName="value"/>
+
+<label class="form__label">{{labels[i]}}</label>
+
+</div>
+
+<!-- <div class="form mb-4"> -->
+  <!-- <select type="hidden" class="form-select btn btn-outline-warning btn-lg px-6 " formControlName="type">
+     <option value="none" selected disabled hidden>Nature</option>
+      <option value="free">Libre</option>
+      <option value="known">Connu</option>
+  </select>
+</div> -->
+</div>
+
+
+
+
+
+
+<!-- <button style="margin-top:12px;height:40px;" class="btn btn-outline-danger" (click)="removeInput(i)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+
+</div>
+
+<!-- <button class="btn btn-outline-secondary" (click)="addInput()">Add Input </button> -->
+
+
+<!-- <button class="btn btn-outline-success" (click)="onSubmit(articleForm)">Save</button> -->
+<button type="submit" [disabled]="!articleForm.valid" (click)="onSubmit(articleForm)" class="btn btn-outline-success">Save</button>
+<button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">Reset</button>
+              <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">Voir Mon Document</button>
+
+
+</form>
+</div>
+            <div [ngStyle]="{'width' : view ? ' 680pt' : '380pt'}" class=" col s6 mx-3 mt-4 shadow p-2 mb-3 bg-dark rounded">
+              <!-- <button type="submit" class="btn btn-outline-danger">Générer PDF</button> -->
+              <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">Générer PDF</button>
+              <!-- <button onclick="window.print()">Print this Page</button> -->
+
+
+              <!-- <span style="padding-left:10px;color:white;">You can modify the following Text as you wish and generate a PDF ! ( Click anywhere on the file ! )</span> -->
+
+                <div style="margin:10px;"  class="scroll form-control">
+                  <div style="height:auto; margin:10px;" #article>
+                <div contenteditable="true">
+                  <hr>
+                  <p style='margin:0cm;font-size:16px;'>&nbsp;</p>
+                  <table style="width:680.0pt;margin-left:32.4pt;">
+                      <tbody>
+
+                              <td style="width: 162pt;border-left: none;border-right: none;padding: 0cm 5.4pt;">
+                                  <p style='margin:0cm;font-size:16px;'><br></p>
+
+                              <td style="border-left:none;border-right:none;padding:0cm 5.4pt 0cm 5.4pt;">
+                                  <p style='margin:0cm;font-size:16px;text-align:center;'><strong>ROYAUME DU MAROC</strong></p>
+                                  <p style='margin:0cm;font-size:16px;text-align:center;'><strong>UNIVERSITE &nbsp;ABDELMALEK ESSAADI</strong></p>
+                                  <p style='margin:0cm;font-size:16px;text-align:center;text-indent:9.0pt;'><strong><span *ngIf=view>{{ institut }} </span><span *ngIf=!view >## institut ## </span></strong></p>
+                                  <h2 style='font-size:16px;text-align:center;'><strong>TANGER</strong></h2>
+
+                  </table>
+<hr>
+                  <p style='margin:0cm;font-size:16px;text-align:center;'><strong><span style="font-size:19px;">&nbsp;</span></strong></p>
+                  <p style='margin:0cm;font-size:16px;text-align:center;'><strong><span style="font-size:19px;">&nbsp;</span></strong></p>
+                  <p style='margin:0cm;font-size:16px;text-align:center;'><strong><span style="font-size:19px;">CONVENTION CADRE</span></strong></p>
+                  <p style='margin:0cm;font-size:16px;text-align:center;'><strong><em><span style="font-size:19px;" *ngIf=view>{{ institut }} </span><span style="font-size:19px;" *ngIf=!view >## institut ## </span></em></strong></p>
+                  <p style='margin:0cm;font-size:16px;'><span style="font-size:19px;">&nbsp;</span></p>
+                  <p style='margin:0cm;font-size:16px;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;'>&nbsp;</p>
+                  <p style='margin:0cm;text-align:left;font-size:16px;margin-left:27.0pt;line-height:150%;'><strong>Entre&nbsp;:&nbsp;<span *ngIf=view>{{ company_name }} </span><span *ngIf=!view >## Company Name ## </span></strong></p>
+                  <p style='margin:0cm;text-align:left;font-size:16px;line-height:150%;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;repr&eacute;sent&eacute;(e) par : <strong><span *ngIf=view>{{ company_owner }} </span><span *ngIf=!view >## Company Owner ## </span></strong></p>
+                  <p style='margin:0cm;font-size:16px;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;d&rsquo;une part</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:26.95pt;text-align:justify;line-height:150%;'><strong>Et&nbsp;:</strong> l&apos;<strong><span *ngIf=view>{{ institut }} </span><span *ngIf=!view >## institut ## </span>&nbsp;</strong>repr&eacute;sent&eacute;e par son Directeur : <strong><span *ngIf=view>{{ directeur }} </span><span *ngIf=!view >## Directeur ## </span></strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;'>d&rsquo;autre part,</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;'>Il a &eacute;t&eacute; convenu ce qui suit&nbsp;:</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;'><strong>ARTICLE 1&nbsp;:</strong></p>
+                  <p style='margin:0cm;text-align:justify;font-size:13px;margin-left:27.0pt;'><span style="font-size:16px;">La pr&eacute;sente convention r&eacute;git les rapports entre les deux parties, dans le cadre de l&rsquo;organisation de stages d&rsquo;entreprises qui s&rsquo;inscrivent dans le programme de formation de l&rsquo;&eacute;tablissement de formation cit&eacute; ci-dessus.</span></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 2&nbsp;:</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>Le stage de formation a pour but essentiel d&rsquo;assurer l&rsquo;application pratique de l&rsquo;enseignement donn&eacute; par l&rsquo;&eacute;tablissement, et d&rsquo;&eacute;laborer un projet sur un th&egrave;me propos&eacute; par l&rsquo;entreprise.</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 3&nbsp;:</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>Le programme du stage est &eacute;labor&eacute; par le personnel charg&eacute; de l&rsquo;encadrement du stagiaire, en tenant compte du programme et de la sp&eacute;cialit&eacute; des &eacute;tudes de l&rsquo;&eacute;l&egrave;ve, ainsi que de la disponibilit&eacute; des moyens humain et mat&eacute;riel de l&rsquo;entreprise. Cette derni&egrave;re se r&eacute;serve le droit de r&eacute;orienter l&rsquo;apprentissage en fonction des qualifications du stagiaire et du rythme de ses activit&eacute;s professionnelles.</p>
+                  <p style='margin:0cm;font-size:16px;text-align:justify;'><strong>&nbsp;</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 4 : &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>Pendant le stage, l&rsquo;&eacute;l&egrave;ve est soumis aux usages et r&egrave;glements de l&rsquo;entreprise, notamment en mati&egrave;re de discipline, des horaires et des cong&eacute;s. En cas de manquement &agrave; ces r&egrave;gles, le chef d&rsquo;entreprise se r&eacute;serve le droit de mettre fin au stage, apr&egrave;s avoir pr&eacute;venu le Directeur de l&apos;Ecole.</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>&nbsp;</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 5&nbsp;:</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>Au terme de son stage, le stagiaire est dans l&rsquo;obligation de remettre une copie de son rapport de stage &agrave; l&rsquo;entreprise.&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 6&nbsp;:</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>L&rsquo;&eacute;tudiant s&rsquo;engage &agrave; garder confidentielle toute information recueillie dans l&rsquo;entreprise, et &agrave; n&rsquo;utiliser en aucun cas ces informations pour faire l&rsquo;objet d&rsquo;une publication, communication &agrave; des tiers, conf&eacute;rences, &hellip;, sans l&rsquo;accord de l&rsquo;entreprise.</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 7 :&nbsp;</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>L&rsquo;&eacute;l&egrave;ve stagiaire en p&eacute;riode de stage au sein de l&rsquo;entreprise doit &ecirc;tre couvert, par ses propres moyens, pour les accidents de travail survenus par le fait ou &agrave; l&rsquo;occasion de son s&eacute;jour.</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 8&nbsp;:</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>L&rsquo;entreprise s&rsquo;engage &agrave; fournir &agrave; l&rsquo;&eacute;tablissement de formation, s&rsquo;il le demande, son &eacute;valuation sur le travail du stagiaire, m&ecirc;me sur certains points particuliers qu&rsquo;il jugera n&eacute;cessaires.</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 9&nbsp;:</strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>En cas de non-respect de l&rsquo;une des clauses de cette convention, aussi bien par l&rsquo;&eacute;l&egrave;ve stagiaire que son &eacute;tablissement d&rsquo;origine, l&rsquo;entreprise se r&eacute;serve le droit de mettre fin &agrave; ce stage.</p>
+                  <p style='margin:0cm;font-size:16px;text-align:justify;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>ARTICLE 10&nbsp;:</strong></p>
+                  <p style='margin:0cm;text-align:left;font-size:16px;margin-left:27.0pt;'>&nbsp;</p>
+                  <p style='margin:0cm;text-align:left;font-size:16px;margin-left:27.0pt;line-height:150%;'>&nbsp;Dans le cadre de la pr&eacute;sente convention :<strong>&nbsp;</strong><strong><span *ngIf=view>{{ company_name }} </span><span *ngIf=!view >## Company Name ## </span></strong></p>
+                  <p style='margin:0cm;font-size:16px;line-height:150%;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;accepte de recevoir l&rsquo;&eacute;l&egrave;ve &ndash; stagiaire :&nbsp;<strong><span style="font-size:15px;line-height:150%;" *ngIf=view>{{ nom_stagiaire }} </span><span *ngIf=!view style="font-size:15px;line-height:150%;">## Nom Stagiaire ## </span></strong></p>
+                  <p style='margin:0cm;text-align:left;font-size:16px;margin-left:27.0pt;line-height:150%;'>&nbsp;inscrit(e) &agrave; l&apos;ENSA de Tanger en <strong>&nbsp;</strong><span *ngIf=view>{{ niveau_stagiaire }} </span><span *ngIf=!view >## Niveau Stagiaire ## </span><sup>&nbsp;</sup>ann&eacute;e<strong>&nbsp;</strong>cycle ing&eacute;nieur,&nbsp;G&eacute;nie <span *ngIf=view>{{ specialite_stagiaire }} </span><span *ngIf=!view >## Spécialité Stagiaire ## </span></p>
+                  <p style='margin:0cm;text-align:left;font-size:16px;margin-left:27.0pt;line-height:150%;'>durant la p&eacute;riode allant du <span *ngIf=view>{{ date_debut }} </span><span *ngIf=!view >## Date Début ## </span> &nbsp;au <span *ngIf=view>{{ date_fin }} </span><span *ngIf=!view >## Date Fin ## </span>.</p>
+                  <p style='margin:0cm;font-size:16px;text-align:justify;line-height:150%;'>&nbsp; &nbsp; &nbsp; &nbsp; Fait &agrave; Tanger, <span *ngIf=view>{{ date_ecriture }} </span><span *ngIf=!view >## Date D'écriture ## </span></p>
+                  <p style='margin:0cm;font-size:16px;margin-right:26.95pt;text-align:justify;line-height:150%;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;line-height:150%;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Lu et approuv&eacute; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><em>&nbsp;</em></p>
+                  <h1 style='margin:0cm;text-align:justify;font-size:16px;font-weight:normal;margin-left:27.0pt;'><strong><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Le Directeur de la Soci&eacute;t&eacute;</em></strong><strong>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<em>&nbsp; &nbsp; &nbsp; &nbsp; Le Directeur de l&apos;<span *ngIf=view>{{ institut }} </span><span *ngIf=!view >## institut ## </span></em></strong></h1>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<em>&nbsp;</em></strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong><em>&nbsp;</em></strong></p>
+                  <p style='margin:0cm;font-size:16px;text-align:justify;'><strong><em>&nbsp;</em></strong></p>
+                  <p style='margin:0cm;font-size:16px;text-align:justify;'><strong><em>&nbsp;</em></strong></p>
+                  <p style='margin:0cm;font-size:16px;margin-left:27.0pt;text-align:justify;'><strong><em>&nbsp;</em></strong></p>
+                  <h2 style='margin:0cm;font-size:16px;font-style:italic;margin-left:239.4pt;text-indent:8.4pt;'>Le stagiaire</h2>
+                  <p><strong><em><span style='font-size:16px;'><br>&nbsp;</span></em></strong><span style='font-size:16px;'><br>&nbsp;</span></p>
+                  <p style='margin:0cm;font-size:16px;'>&nbsp;</p>
+
+
+
+
+
+
+
+                  <div style="display: inline-block; width: 300px; margin: 1em">
+
+                  <div style="margin-bottom: 1em; font-weight: bold; font-style: italic;">L&#39;Associé Unique
+                  </div>
+
+                  <div style="border: solid black 1px; height: 150px">
+                  </div>
+
+                  <div style="font-size: 0.8em; color: light-gray;font-style: italic;position: relative; left: 1em; bottom: 2em">signature
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+

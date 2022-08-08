@@ -1,0 +1,305 @@
+
+<body class="bg-dark">
+
+  <div class="container ">
+
+  <div class="row">
+    <div class="col s12 mt-3 mb-3">
+
+      <div class="card bg-dark">
+        <div class="car-content bg-dark black-text">
+          <div class="row bg-dark ">
+
+            <div *ngIf="!view" class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
+
+              <!-- <form #formulaire="ngForm" >
+                <input type="hidden" [(ngModel)]="id" name="id">
+                <input type="hidden" [(ngModel)]="document_name" name="document_name">
+                <input type="hidden" [(ngModel)]="user" name="user">
+
+
+              <div class="form mt-2 mx-2 mb-4">
+                <select name="type_contrat" [(ngModel)]="type_contrat" class="form-select btn btn-outline-success btn-lg px-6 ">
+                    <option [ngValue]="type_contrat" selected disabled hidden>Type De Contrat</option>
+                    <option value="determinée">CDI</option>
+                    <option value="indeterminée">CDD</option>
+                </select>
+              </div>
+
+
+              <div class="form mt-2 mx-2 mb-4">
+                <input name="employeur" [(ngModel)]="employeur" type="text" class="form__input" required autocomplete="off" placeholder=" ">
+                <label for="employeur" class="form__label">Employeur</label>
+              </div>
+
+
+              <div class="form mx-2 mb-4">
+                <input name="salarie" [(ngModel)]="salarie" type="text" class="form__input" required autocomplete="off" placeholder=" ">
+                <label for="salarie" class="form__label">Salarié</label>
+              </div>
+
+              <div class="form mx-2 mb-4">
+                <input name="societe" [(ngModel)]="societe" type="text" class="form__input" required autocomplete="off" placeholder=" ">
+                <label for="societe" class="form__label">Société</label>
+              </div>
+
+
+              <div class="form mx-2 mb-4">
+                <input name="renumeration" [(ngModel)]="renumeration" type="number" class="form__input" required autocomplete="off" placeholder=" ">
+                <label for="renumeration" class="form__label">Rénumération</label>
+              </div>
+
+              <div class="form mt-2 mx-2 mb-4">
+                <input name="adresse_societe" [(ngModel)]="adresse_societe" type="text" class="form__input" required autocomplete="off" placeholder=" ">
+                <label for="adresse_societe" class="form__label">Adresse de la Société</label>
+              </div>
+
+
+
+              <div class="form mx-2 mb-4">
+                <input name="date_debut_contrat" [(ngModel)]="date_debut_contrat" type="date" class="form__input" required autocomplete="off" placeholder=" ">
+                <label for="date_debut_contrat" class="form__label">Date Début Contrat</label>
+              </div>
+
+              <div class="form mx-2 mb-4">
+                <input name="ville_ecriture" [(ngModel)]="ville_ecriture" type="text" class="form__input" required autocomplete="off" placeholder=" ">
+                <label for="ville_ecriture" class="form__label">Ville Ecriture</label>
+              </div>
+
+              <div class="form mx-2 mb-4">
+                <input name="date_ecriture" [(ngModel)]="date_ecriture" type="date" class="form__input" required autocomplete="off" placeholder=" ">
+                <label for="date_ecriture" class="form__label">Date Ecriture</label>
+              </div>
+
+
+
+              <button type="submit" [disabled]="!formulaire.valid" (click)="onSubmit(formulaire)" class="btn btn-outline-success">Save</button>
+              <button type="submit" (click)="resetForm(formulaire)" class="btn btn-outline-danger">Reset</button>
+              <button type="submit" *ngIf="saved" (click)="getDoc(id_str)" class="btn btn-outline-warning">Voir Mon Document</button>
+
+
+            </form> -->
+
+
+            <form [formGroup]="articleForm">
+
+              <div class="d-flex" *ngFor="let control of articleForm.controls.Field['controls']; let i=index;" formArrayName="Field">
+
+              <!-- mandatory to have a in the following line [formGroupName]="i" or else it won t work ! -->
+              <div [formGroupName]="i">
+              <div [ngStyle]="{'visibility' : !show ? ' visible' : 'hidden'}" class="form mt-2 mx-2 mb-2" >
+
+                <!-- <input class="form__input" type="hidden" value="{{id}}" formControlName="id"/> -->
+
+              <input class="form__input" type="hidden" value="" formControlName="label"/>
+              <input class="form__input" type="hidden" value="free" formControlName="type"/>
+
+              <!-- [(ngModel)]="company_name" -->
+              <input class="form__input" type="{{types[i]}}"  formControlName="value"/>
+
+              <label class="form__label">{{labels[i]}}</label>
+
+              </div>
+
+              <!-- <div class="form mb-4"> -->
+                <!-- <select type="hidden" class="form-select btn btn-outline-warning btn-lg px-6 " formControlName="type">
+                   <option value="none" selected disabled hidden>Nature</option>
+                    <option value="free">Libre</option>
+                    <option value="known">Connu</option>
+                </select>
+              </div> -->
+
+              </div>
+
+
+
+
+
+
+              <!-- <button style="margin-top:12px;height:40px;" class="btn btn-outline-danger" (click)="removeInput(i)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+
+              </div>
+
+              <!-- <button class="btn btn-outline-secondary" (click)="addInput()">Add Input </button> -->
+
+
+              <!-- <button class="btn btn-outline-success" (click)="onSubmit(articleForm)">Save</button> -->
+              <button type="submit" [disabled]="!articleForm.valid" (click)="onSubmit(articleForm)" class="btn btn-outline-success">Save</button>
+              <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">Reset</button>
+              <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">Voir Mon Document</button>
+
+
+              </form>
+
+
+
+
+
+
+
+            </div>
+            <div class=" col s6 mx-3 mt-4 shadow p-2 mb-5 bg-dark rounded">
+              <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">Générer PDF</button>
+              <span style="padding-left:10px;color:white;">You can modify the following Text as you wish and generate a PDF ! ( Click anywhere on the file ! )</span>
+
+                <div style="margin:10px;"  class="scroll form-control">
+                  <div style="height:auto; margin:10px;" #article>
+                <div contenteditable="true">
+<strong>
+<div style="text-align:center;">
+
+                  <h1 id="contrat-de-travail-dur-e-__">Contrat de travail à durée <span *ngIf=view>{{ type_contrat }} </span><span *ngIf=!view >## Type Contrat ## </span>
+                  </h1>
+                </div>
+              </strong>
+                  <hr>
+
+                  <p>
+                  <strong>Entre les soussignés :
+                  </strong>
+                  </p>
+
+                  <p><span *ngIf=view>{{ employeur }} </span><span *ngIf=!view >## Employeur ## </span>
+                  (ci-après l&#39;
+                  <strong>
+                  <em>&quot;Employeur&quot;
+                  </em>
+                  </strong>)
+                  </p>
+
+                  <p>et
+                  </p>
+
+                  <p><span *ngIf=view>{{ salarie }} </span><span *ngIf=!view >## Salarié ## </span> (ci-après le
+                  <strong>
+                  <em>&quot;Salarié&quot;
+                  </em>
+                  </strong>)
+                  </p>
+
+                  <p>
+                  <strong>Il a été convenu :
+                  </strong>
+                  </p>
+
+                  <h2 id="article-1-engagement">ARTICLE 1 : ENGAGEMENT
+                  </h2>
+
+                  <p>Le Salarié est engagé à compter du
+                  <strong> <span *ngIf=view>{{ date_debut_contrat }} </span><span *ngIf=!view >## Date Début de Contrat ## </span>
+                  </strong> en qualité de
+                  <strong><span *ngIf=view>{{ societe }} </span><span *ngIf=!view >## Société ## </span>
+                  </strong>.
+                  </p>
+
+                  <p>Le Salarié assure également n&#39;être engagé auprès d&#39;aucune autre entreprise, sous quelque forme que ce soit, et s&#39;engage à ne pas exercer d&#39;autre activité professionnelle quelle qu’elle soit, pendant la durée du contrat de travail.
+                  </p>
+
+                  <!---fin clause motif CDD -->
+
+
+                  <h2 id="article-4-lieu-de-travail">ARTICLE 2 : LIEU DE TRAVAIL
+                  </h2>
+                  <span class="blur"></span>
+                  <p><span class="blur">Les fonctions exercées par le Salarié seront exercées à l'adresse suivante : <span *ngIf=view>{{ adresse_societe }} </span><span *ngIf=!view >## Adresse De La Société ## </span></span>
+                  </p>
+
+
+
+                  <h2 id="article-5-remuneration">ARTICLE 3 : REMUNERATION
+                  </h2>
+
+                  <p>  La rémunération est fixée à
+
+                  <strong>
+                    <span *ngIf=view>{{ renumeration }} </span><span *ngIf=!view >## Rénumération ## </span>
+                  </strong>$ bruts versée mensuellement.
+                  </p>
+
+                  <h2 id="article-6-conges-payes">ARTICLE 4 : CONGES PAYES
+                  </h2>
+
+                  <p>Le Salarié aura droit aux congés payés institués en faveur des salariés de l’entreprise, en vertu des dispositions légales et conventionnelles applicables à l&#39;entreprise. A l&#39;issue du présent contrat, tout jour de congé non pris donnera lieu à une indemnité compensatrice de congés payés.
+                  </p>
+
+                  <h2 id="article-7-inventions">ARTICLE 5 : INVENTIONS
+                  </h2>
+
+                  <p>Le Salarié est tenu d’informer l’entreprise de toute invention résultant de son contrat de travail ou même en dehors.
+                  </p>
+
+                  <p>Les inventions faites par le Salarié dans le cadre de l’exécution de son contrat de travail, ainsi que les recherches et études demeurent la propriété industrielle de l’entreprise. Le Salarié obtiendra une rémunération supplémentaire adéquate pour toute invention.
+                  </p>
+
+                  <p>Les inventions faites par le Salarié en dehors du cadre de l’exécution de son contrat de travail, ainsi que les recherches et études réalisées demeurent sa propriété intellectuelle, à moins que ladite invention ne soit le fruit de recherches ou d&#39;études réalisées grâce aux moyens techniques mis à sa disposition par l’entreprise ou que ladite invention soit particulièrement pertinente au domaine d’activité de l’entreprise.
+                  </p>
+
+                  <h2 id="article-8-discretion">ARTICLE 6 : DISCRETION
+                  </h2>
+
+                  <p>Le Salarié s’engage à adopter une démarche discrète en ce qui concerne le savoir-faire et les techniques utilisées et employées dans l’entreprise qui auront pu être observés dans le cadre de l’exécution de son contrat de travail.
+                  </p>
+
+
+                  <br>
+
+
+                  <br>
+                  Signé en DEUX (2) exemplaires, à
+                  <strong><span *ngIf=view>{{ ville_ecriture }} </span><span *ngIf=!view >## Ville d'écriture ## </span>
+                  </strong>, le
+                  <strong><span *ngIf=view>{{ date_ecriture }} </span><span *ngIf=!view >## Date d'écriture ## </span>
+                  </strong>,
+
+                  <br>
+
+
+                  <div style="display: inline-block; width: 300px; margin: 1em">
+
+                  <div style="margin-bottom: 1em; font-weight: bold; font-style: italic;">Employeur
+                  </div>
+
+                  <div style="border: solid black 1px; height: 150px">
+                  </div>
+
+                  <div style="font-size: 0.8em; color: light-gray;font-style: italic;position: relative; left: 1em; bottom: 2em">signature
+                  </div>
+
+                  </div>
+
+
+
+
+                  <div style="display: inline-block; width: 300px; margin: 1em">
+
+                  <div style="margin-bottom: 1em; font-weight: bold; font-style: italic;">Salarié
+                  </div>
+
+                  <div style="border: solid black 1px; height: 150px">
+                  </div>
+
+                  <div style="font-size: 0.8em; color: light-gray;font-style: italic;position: relative; left: 1em; bottom: 2em">signature
+                  </div>
+
+                  </div>
+
+
+
+
+
+
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
