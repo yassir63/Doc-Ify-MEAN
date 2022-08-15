@@ -17,6 +17,10 @@ export class FormulaireService {
     return this.http.post(this.path,emp);
   }
 
+  postTemplate(emp : Field) {
+    return this.http.post('http://localhost:3000/formulaire/template',emp);
+  }
+
   postDoc(doc : Document){
     return this.http.post('http://localhost:3000/formulaire/document' , doc);
   }
@@ -24,6 +28,11 @@ export class FormulaireService {
   getArticle(id:any,user:any){
     // console.log(this.path + `/${text}`);
     return this.http.get(this.path + `/${id}` + `/${user}`);
+  }
+
+
+  getTemplate(id:any,docname:any){
+    return this.http.get('http://localhost:3000/dashboard/template'+ `/${id}` + `/${docname}`);
   }
 
   // putEmployee(emp : Sas){

@@ -35,6 +35,7 @@ import { MatNativeDateModule } from '@angular/material/core'
 import { MatButtonModule } from '@angular/material/button';
 import { ArticleComponent } from './document/article/article.component';
 import { DataComponent } from './document/data/data.component';
+import { GeneralComponent } from './document/general/general.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { DataComponent } from './document/data/data.component';
     DashboardComponent,
     ArticleComponent,
     DataComponent,
+    GeneralComponent,
 
 
 

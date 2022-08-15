@@ -6,9 +6,16 @@ const  connectDB  = require('../db2.js');
 
 
 var { Field } = require('../models/fields.js');
+
+var { Template } = require('../models/template.js');
+
 const docSchema = require('../models/docSchema.js');
 const Document = mongoose.model('Document', docSchema);
 const DocumentSchemas = new Map([['documents', docSchema]]);
+
+
+const Docs = ["contrat-travail","convention-stage"]
+
 
        /** Switche to db on same connection pool
  * @return new connection
@@ -173,17 +180,26 @@ router.post('/', async (req,res) => {
 
     // }) ;
     fieldArray = [];
+    fieldLabel = [];
+    fieldNature = [];
+    fieldType = [];
+
+
 
     for(let i=0; i<req.body.Field.length;i++){
         var field = new Field ({
     _id: new ObjectID,
     label : req.body.Field[i].label,
     value : req.body.Field[i].value,
-    type : req.body.Field[i].type
+    type : req.body.Field[i].type,
+    nature: req.body.Field[i].nature,
         });
 
         fieldArray.push(field._id)
         // console.log(fieldArray)
+        fieldLabel.push(field.label)
+        fieldNature.push(field.nature)
+        fieldType.push(field.type)
 
 
         field.save(
@@ -209,13 +225,40 @@ router.post('/', async (req,res) => {
     //     else { console.log(err)
     //         // console.log('Error in Field Save !' + JSON.stringify(err,undefined,2));
     // }});
+
+
+    // var template = new Template ({
+    //   _id: new ObjectID,
+    //   name: req.body.Field[2].value,
+    //   date: req.body.Field[3].value,
+    //   texte: req.body.Field[4].value,
+    //   fields: fieldLabel,
+    //   field_nature: fieldNature,
+    //   field_types: fieldType
+
+    //       });
     
 
+    //       template.save(
+    //         //         (err,doc) => {
+    //         //     // if (!err) { res.send(doc);}
+    //         //     // else { console.log(err)
+    //         //     //     // console.log('Error in Field Save !' + JSON.stringify(err,undefined,2));
+    //         // }}
+    //         );
+
+    let data = '';
+    if(Docs.includes(req.body.Field[2].value)){
+      data = null;
+    }else{
+      data = req.body.Field[4].value;
+    }
     
     var doc = new tenantModel ({
         _id: req.body.Field[0].value,
         name: req.body.Field[2].value,
-        date: req.body.Field[3].value,   // this should be known for evry DOC ATTENTION !!!!!!!!!!!!!!!!!!
+        date: req.body.Field[3].value,
+        texte: data,  // this should be known for evry DOC ATTENTION !!!!!!!!!!!!!!!!!!
         fields: fieldArray
     });
 
@@ -231,11 +274,159 @@ router.post('/', async (req,res) => {
     
     });
 
+
+
+
     console.log("hna2")
 
 
     // mongoose.connection.close();
     
+
+
+
+});
+
+
+
+router.post('/template', async (req,res) => {
+  // await mongoose.disconnect();
+  // mongoose.connection.close();
+
+
+//     mongoose.connect(`mongodb://localhost:27017/${req.body.user}`, (err) => {
+//     if(!err)
+//     console.log(`Connection to ${req.body.user} Succesful !`);
+//     else
+//     console.log('Connection Failed !' + JSON.stringify(err, undefined,2));
+// })
+
+const tenantDB = await switchDB(`${req.body.Field[1].value}`, DocumentSchemas)  // Project + authUsers
+  const tenantModel = await getDBModel(tenantDB, 'documents')
+  
+  // var field = new Field ({
+  //     _id: req.body.id,
+  //     // company_name: req.body.company_name,
+  //     // company_owner: req.body.company_owner,
+  //     // institut: req.body.institut,
+  //     // directeur: req.body.directeur,
+  //     // niveau_stagiaire:req.body.niveau_stagiaire,
+  //     // nom_stagiaire:req.body.nom_stagiaire,
+  //     // specialite_stagiaire:req.body.specialite_stagiaire,
+  //     // date_debut:req.body.date_debut,
+  //     // date_fin:req.body.date_fin,
+  //     // date_ecriture:req.body.date_ecriture,
+
+  //     // salarie :req.body.salarie,
+  //     // employeur:req.body.employeur,
+  //     // societe:req.body.societe,
+  //     // renumeration:req.body.renumeration,
+  //     // date_debut_contrat:req.body.date_debut_contrat,
+  //     // type_contrat:req.body.type_contrat,
+  //     // ville_ecriture:req.body.ville_ecriture,
+  //     // adresse_societe:req.body.adresse_societe,
+  //     label : req.body.label,
+  //     value : req.body.value,
+  //     type : req.body.type
+
+  // }) ;
+  fieldArray = [];
+  fieldLabel = [];
+  fieldNature = [];
+  fieldType = [];
+
+
+
+  for(let i=0; i<req.body.Field.length;i++){
+      var field = new Field ({
+  _id: new ObjectID,
+  label : req.body.Field[i].label,
+  value : req.body.Field[i].value,
+  type : req.body.Field[i].type,
+  nature: req.body.Field[i].nature,
+      });
+
+      fieldArray.push(field._id)
+      // console.log(fieldArray)
+      fieldLabel.push(field.label)
+      fieldNature.push(field.nature)
+      fieldType.push(field.type)
+
+
+      field.save(
+  //         (err,doc) => {
+  //     // if (!err) { res.send(doc);}
+  //     // else { console.log(err)
+  //     //     // console.log('Error in Field Save !' + JSON.stringify(err,undefined,2));
+  // }}
+  );
+  }
+  console.log("hna4")
+
+  res.send(field)
+  // console.log(req.body.Field.length)
+  // console.log(req.body.Field[0])
+  // console.log(req.body.Field)
+
+
+  // field = req.body; !!!!!!!!!!!!!
+
+  //  field.save((err,doc) => {
+  //     if (!err) { res.send(doc);}
+  //     else { console.log(err)
+  //         // console.log('Error in Field Save !' + JSON.stringify(err,undefined,2));
+  // }});
+
+
+  var template = new Template ({
+    _id: new ObjectID,
+    name: req.body.Field[2].value,
+    date: req.body.Field[3].value,
+    texte: req.body.Field[4].value,
+    fields: fieldLabel,
+    field_nature: fieldNature,
+    field_types: fieldType
+
+        });
+  
+
+        template.save(
+          //         (err,doc) => {
+          //     // if (!err) { res.send(doc);}
+          //     // else { console.log(err)
+          //     //     // console.log('Error in Field Save !' + JSON.stringify(err,undefined,2));
+          // }}
+          );
+
+  
+  var doc = new tenantModel ({
+      _id: req.body.Field[0].value,
+      name: req.body.Field[2].value,
+      date: req.body.Field[3].value,
+      texte: req.body.Field[4].value,  // this should be known for evry DOC ATTENTION !!!!!!!!!!!!!!!!!!
+      fields: fieldArray
+  });
+
+  // const userDB = await switchDB(tenant.username, DocumentSchemas)  
+  // const documentModel = await getDBModel(userDB, 'documents')
+
+  // console.log(doc)
+
+   doc.save((data,err) => {
+      if (!err) { res.send(data);}
+      // else { console.log('Error in Document Save !' + JSON.stringify(err,undefined,2));
+      // }
+  
+  });
+
+
+
+
+  console.log("hna3")
+
+
+  // mongoose.connection.close();
+  
 
 
 

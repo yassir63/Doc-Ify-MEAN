@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
 
   username = localStorage.getItem('user');
   mesdocs:any = {};
+  templates:any={};
+
 
   ngOnInit(): void {
     if(localStorage.getItem('token')) {
@@ -34,19 +36,36 @@ export class DashboardComponent implements OnInit {
 
     this.apicallService.mydocs(this.username,null).subscribe((res:any) => {
       this.mesdocs = res;
+      console.log(this.mesdocs)
+    })
+
+      this.apicallService.templates(this.username,null).subscribe((res:any) => {
+        this.templates = res;
+        console.log(this.templates)
+})
 }
-  )}
 
 
   getDoc(id:string,docname:any){
 
 
       // this.stg = data;
-      this.route.navigate([`documents/${docname}`],{ queryParams: { view: true , id : id, user : this.username} }) // does not work
+      this.route.navigate([`documents/${docname}`],{ queryParams: { view: true , id : id, docname : docname , user : this.username} }) // does not work
 
 
     // this.view = true;
   }
+
+
+  getTemp(id:string,docname:any){
+
+
+    // this.stg = data;
+    this.route.navigate([`documents/${id}/${docname}`],{ queryParams: { view: true , id : id, docname : docname ,user : this.username} }) // does not work
+
+
+  // this.view = true;
+}
 
 
   onLogout(){

@@ -49,7 +49,8 @@ export class ContratTravailComponent implements OnInit {
       this.formBuilder.group({
         'label': new FormControl(this.labels[0]),
         'value': new FormControl(this.values[0]),
-        'type' : new FormControl('free')
+        'type' : new FormControl('free'),
+        'nature':new FormControl(this.types[0])
     })
   ])
   })
@@ -168,7 +169,8 @@ export class ContratTravailComponent implements OnInit {
         let newInput = this.formBuilder.group({
         'label' : this.labels[i],
         'value' : this.values[i],
-        'type' : 'free'
+        'type' : 'free',
+        'nature': this.types[i]
         })
         if(this.types[i] != 'hidden'){
           this.show = false;

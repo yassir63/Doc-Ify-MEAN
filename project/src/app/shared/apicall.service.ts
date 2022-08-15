@@ -38,7 +38,11 @@ export class ApicallService {
 
 
   mydocs(user:any,docname:any){
-    return this.http.get(`http://localhost:3000/dashboard/${user}`)
+    return this.http.get(`http://localhost:3000/dashboard/docs/${user}`)
+  }
+
+  templates(user:any,docname:any){
+    return this.http.get(`http://localhost:3000/dashboard/templates`)
   }
 
 

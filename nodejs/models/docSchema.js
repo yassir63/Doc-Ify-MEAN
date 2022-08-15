@@ -13,6 +13,9 @@ const docSchema = mongoose.Schema({
   date: {
     type: String,
   },
+  texte : {
+    type :String,
+  },
   // fields:  {
   //   $ref: "fields",
     

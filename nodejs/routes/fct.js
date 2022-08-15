@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 
 const docSchema = require('../models/docSchema.js');
 const DocumentSchemas = new Map([['documents', docSchema]]);
+var { Template } = require('../models/template.js');
 
 
        /** Switche to db on same connection pool
@@ -33,9 +34,19 @@ const DocumentSchemas = new Map([['documents', docSchema]]);
                 return db.model(modelName)
               }
     
-        
+router.get('/templates', async (req,res) => {
 
-router.get('/:id', async (req,res) => {
+  const temps = await Template.find({})
+
+  // console.log(req.body.user)
+  
+  // return tenants;
+  res.send(temps)
+
+
+});
+
+router.get('/docs/:id', async (req,res) => {
 
     const tenantDB = await switchDB(`${req.params.id}`,DocumentSchemas) 
     const tenantModel = await getDBModel(tenantDB, 'documents')
@@ -45,6 +56,31 @@ router.get('/:id', async (req,res) => {
     
     // return tenants;
     res.send(tenants)
+
+
+});
+
+// router.get('/templates', async (req,res) => {
+
+//   const temps = Template.find({})
+
+//   // console.log(req.body.user)
+  
+//   // return tenants;
+//   res.send(temps)
+
+
+// });
+
+
+router.get('/template/:id/:docname', async (req,res) => {
+
+  
+  const temp = await Template.findOne({id: `${req.params.id}`, name : `${req.params.docname}`})
+
+  // console.log(req.body.user)
+  
+  res.send(temp)
 
 
 });

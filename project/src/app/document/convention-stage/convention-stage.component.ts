@@ -59,7 +59,8 @@ export class ConventionStageComponent implements OnInit {
       this.formBuilder.group({
         'label': new FormControl(this.labels[0]),
         'value': new FormControl(this.values[0]),
-        'type' : new FormControl('free')
+        'type' : new FormControl('free'),
+        'nature':new FormControl(this.types[0])
     })
   ])
   })
@@ -192,14 +193,14 @@ export class ConventionStageComponent implements OnInit {
         this.document_name= this.stg.fields[2].value;
         this.date_ecriture= this.stg.fields[3].value;
         this.company_owner= this.stg.fields[4].value;
-         this.nom_stagiaire= this.stg.fields[5].value;
-          this.niveau_stagiaire= this.stg.fields[6].value;
-           this.specialite_stagiaire= this.stg.fields[7].value;
-            this.date_debut= this.stg.fields[8].value;
-             this.date_fin= this.stg.fields[9].value;
-             this.company_name= this.stg.fields[10].value;
-             this.institut= this.stg.fields[11].value;
-             this.directeur= this.stg.fields[12].value;
+        this.nom_stagiaire= this.stg.fields[5].value;
+        this.niveau_stagiaire= this.stg.fields[6].value;
+        this.specialite_stagiaire= this.stg.fields[7].value;
+        this.date_debut= this.stg.fields[8].value;
+        this.date_fin= this.stg.fields[9].value;
+        this.company_name= this.stg.fields[10].value;
+        this.institut= this.stg.fields[11].value;
+        this.directeur= this.stg.fields[12].value;
 
       })
 
@@ -211,7 +212,8 @@ export class ConventionStageComponent implements OnInit {
       let newInput = this.formBuilder.group({
       'label' : this.labels[i],
       'value' : this.values[i],
-      'type' : 'free'
+      'type' : 'free',
+      'nature': this.types[i]
       })
       if(this.types[i] != 'hidden'){
         this.show = false;

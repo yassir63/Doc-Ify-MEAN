@@ -5,6 +5,7 @@ import { ArticleComponent } from './document/article/article.component';
 import { ContratTravailComponent } from './document/contrat-travail/contrat-travail.component';
 import { ConventionStageComponent } from './document/convention-stage/convention-stage.component';
 import { DocumentComponent } from './document/document.component';
+import { GeneralComponent } from './document/general/general.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
@@ -40,6 +41,12 @@ const routes: Routes = [
       },
       {
         path : 'create', component : ArticleComponent
+      },
+      {
+        path : ':docname', component : ArticleComponent
+      },
+      {
+        path : ':id/:docname', component : GeneralComponent
       }
 
 

@@ -27,7 +27,8 @@
 //   adresse_societe:{type:String},
 label : {type: String},
 value : {type : String},
-type : {type : String}
+type : {type : String},
+nature:{type: String},
 
  });
 

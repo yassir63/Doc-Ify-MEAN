@@ -15,6 +15,15 @@
 
         <button routerLink="/documents/create" style="margin:10px;" class="btn btn-secondary">Make a Template</button>
 
+
+        <div>Custom Templates :</div>
+        <ul>
+          <li *ngFor="let temp of templates"><button style="margin:10px;" mat-raised-button (click)="getTemp(temp._id,temp.name)" color="accent">{{ temp.name }}</button></li>
+      </ul>
+
+
+
+
         <div>My Documents :</div>
         <ul>
           <li *ngFor="let doc of mesdocs"><button style="margin:10px;" mat-raised-button (click)="getDoc(doc._id,doc.name)" color="accent">{{ doc.name }} / {{doc.date}}</button></li>
