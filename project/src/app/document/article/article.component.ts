@@ -5,7 +5,7 @@ import { ObjectID } from 'bson';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { FormulaireService } from 'src/app/shared/formulaire.service';
-import { DataComponent } from '../data/data.component';
+
 
 @Component({
   selector: 'app-article',

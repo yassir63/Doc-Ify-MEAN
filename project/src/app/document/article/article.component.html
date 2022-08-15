@@ -110,43 +110,56 @@
 
          <div *ngIf="!view && !etape1 && !etape2 && !etape3 && etape4" class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
 
-
     <form [formGroup]="articleForm">
 
 <div class="d-flex" *ngFor="let control of articleForm.controls.Field['controls']; let i=index" formArrayName="Field">
 
    <!-- mandatory to have a in the following line [formGroupName]="i" or else it won t work ! -->
-<div class="row form mt-2 mx-2 mb-2" [formGroupName]="i">
-  <div class="col-md-8 offset-md-5" >
-    <div class="form mt-2 mx-2 mb-4">
+<div  [formGroupName]="i">
+  <div class="form-group col-xs-6">    <div class="form mt-2 mx-2 mb-4">
 <input class="form__input" type="text" formControlName="label"/>
 <label class="form__label">Label</label>
-
+</div>
 </div>
 <!--<input class="form__input" type="text" value="free" formControlName="type"/> -->
-<div class="form mt-2 mx-2 mb-4">
-  <select formControlName="type" class="form-select btn btn-outline-success btn-lg px-6 ">
+<div class="form-group col-xs-6">
+  <div class="form mt-2 mx-2 mb-4">
+   <select formControlName="type" class="form-select btn btn-outline-success btn-lg px-6 ">
       <option [ngValue]="type" selected disabled hidden>Type</option>
       <option value="free">Libre</option>
       <option value="known">Connu</option>
   </select>
+  </div>
 </div>
-<div class="form mt-3 mx-5 ">
+<!-- <div class="form mt-3 mx-5 "> -->
+  <div class="form-group col-xs-6">
+    <div class="form mt-2 mx-2 mb-4">
 <input class="form__input" type="{{types[i]}}"  formControlName="value"/>
 <label class="form__label">Value</label>
 </div>
-<div>
+</div>
+<!-- <div> -->
+  <div class="form-group col-xs-6">
+    <div class="form mt-2 mx-2 mb-4">
 <input class="form__input" type="text"  formControlName="nature"/>
 <label class="form__label">Nature</label>
 </div>
+</div>
+
+<br>
+<div class="text-light">
+  <hr>
+</div>
+<br>
 
 <!-- <label class="form__label">{{labels[i]}}</label> -->
 
-  </div>
+
 </div>
   <!-- <button style="margin-top:12px;height:40px;" class="btn btn-outline-danger" (click)="removeInput(i)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
 
 </div>
+
 
 <!-- <button class="btn btn-outline-secondary" (click)="addInput()">Add Input </button> -->
 
