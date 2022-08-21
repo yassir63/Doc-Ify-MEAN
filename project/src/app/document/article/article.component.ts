@@ -15,6 +15,9 @@ import { FormulaireService } from 'src/app/shared/formulaire.service';
 export class ArticleComponent implements OnInit , AfterViewInit {
 
 
+  data : any | undefined ;
+
+
 
   user = localStorage.getItem('user')
   document_name="";
@@ -39,8 +42,8 @@ export class ArticleComponent implements OnInit , AfterViewInit {
 
 
   types = ['']; // finish this and the one after ! in order to add these inputs !
-    labels = ['id','user','document_name','date_ecriture','texte ( put the HTML code )']
-    values = [this.id,this.user,this.document_name,'',this.texte]
+  labels = ['id','user','document_name','date_ecriture','texte ( put the HTML code )']
+  values = [this.id,this.user,this.document_name,'',this.texte]
   stg:any = {};
   saved : boolean = false;
   etape1 : boolean = true;
@@ -48,7 +51,9 @@ export class ArticleComponent implements OnInit , AfterViewInit {
   etape3 : boolean = false;
   etape4 : boolean = false;
   view : boolean = false;
-
+  upload : boolean = false;
+  pdf : boolean = false;
+  edit : boolean = false;
 
 
   // types = [DataComponent, DataComponent];
@@ -60,6 +65,7 @@ export class ArticleComponent implements OnInit , AfterViewInit {
 
 
   constructor(private formBuilder : FormBuilder, private formulaireService : FormulaireService, public route : ActivatedRoute) {
+
 
   }
 
@@ -89,13 +95,13 @@ export class ArticleComponent implements OnInit , AfterViewInit {
   // it gravida rutrum quisque non tellus orci ac.</p>{{input2}}`;
 
 
-  data =`<p>Pellentesque pulvinar pellentesque habitant morbi tristique senectus. Est lorem ipsum dolor sit. Laoreet suspendisse i
-  nterdum consectetur libero. Leo duis ut diam quam nulla porttitor massa. Nam at lectus urna duis convallis. Odio ut enim blandit vo
-  lutpat maecenas. Aliquet lectus proin nibh nio tempor orci.</p> ## id ##
-  <p>Quis vel eros donec ac. Id nibh tortor id asl condimentum id venenatis. Ullamcorper sit amet risus nullam eget felis eget nunc. U
-  t etiam sit amet nisl purus. Quis vel eros donec ac odiliquet lectus proin nibh nisl condimentum. Auctor augue mauris augue neque. Nisl puru
-  s in mollis nunc sed id semper risus. Turpis in eu mi bibendum. Sit amet commodo nulla facilisi nullam vehicula ipsum a. In hendrer
-  it gravida rutrum quisque non tellus orci ac.</p> ## name ##`;
+  // data =`<p>Pellentesque pulvinar pellentesque habitant morbi tristique senectus. Est lorem ipsum dolor sit. Laoreet suspendisse i
+  // nterdum consectetur libero. Leo duis ut diam quam nulla porttitor massa. Nam at lectus urna duis convallis. Odio ut enim blandit vo
+  // lutpat maecenas. Aliquet lectus proin nibh nio tempor orci.</p> ## id ##
+  // <p>Quis vel eros donec ac. Id nibh tortor id asl condimentum id venenatis. Ullamcorper sit amet risus nullam eget felis eget nunc. U
+  // t etiam sit amet nisl purus. Quis vel eros donec ac odiliquet lectus proin nibh nisl condimentum. Auctor augue mauris augue neque. Nisl puru
+  // s in mollis nunc sed id semper risus. Turpis in eu mi bibendum. Sit amet commodo nulla facilisi nullam vehicula ipsum a. In hendrer
+  // it gravida rutrum quisque non tellus orci ac.</p> ## name ##`;
 
 
 
@@ -210,7 +216,8 @@ export class ArticleComponent implements OnInit , AfterViewInit {
 
 
           this.etape1 = false;
-          this.etape2 = true;
+          // this.etape2 = true;
+          this.upload = true;
 
           this.length = formValue.value.length
           // console.log(this.length)
@@ -230,27 +237,10 @@ export class ArticleComponent implements OnInit , AfterViewInit {
 
 
           onSubmit2(formValue: FormGroup){
-            // this.formulaireService.postArticle(formValue.value).subscribe((res) => {
 
-            //   this.resetForm(formValue);
-            //   this.saved = true;
 
-            // for(let i = 0; i<formValue.value.articleInput.length;i++){
-            //   this.input${i} = formValue.value.articleInput[i].input;
-            //   }
-
-            // console.log(this.el.nativeElement)
-            // console.log(this.data2)
-
-            //   // this.refreshList();
-            // })1
-            // for(let i = 0; i<formValue.value.articleInput.length;i++){
-            // console.log(formValue.value.articleInput[i].input);
-            // // console.log(formValue.value.articleInput.length);
-            // }
-
-            this.etape2 = false;
-            this.etape3 = true;
+            this.etape3 = false;
+            this.etape4 = true;
 
             console.log(formValue.value)
 
@@ -284,6 +274,18 @@ export class ArticleComponent implements OnInit , AfterViewInit {
             }
 
 
+            Upload(){
+
+              this.pdf = true;
+              this.edit = true;
+
+            }
+
+            Saisie(){
+              this.etape2 = true;
+            }
+
+
 
             onSubmitText(formValue: NgForm){
               // this.formulaireService.postArticle(formValue.value).subscribe((res) => {
@@ -305,14 +307,97 @@ export class ArticleComponent implements OnInit , AfterViewInit {
               // // console.log(formValue.value.articleInput.length);
               // }
 
-              this.texte = formValue.value.texte ;
+              console.log(formValue.value)
+              this.document_name = formValue.value.document_name
+              this.values[2] = formValue.value.document_name
 
-              this.etape3 = false;
-              this.etape4 = true ;
+
+              // console.log(formValue.value.document_name)
+              this.texte = formValue.value.texte ;
+              this.values[4] = formValue.value.texte ;
+
+
+
+
+              this.etape2 = false;
+              this.etape3 = true ;
+
+              // console.log(this.data)
+              // console.log(this.document_name)
 
               // console.log(formValue.value.texte)
 
               }
+
+              onSubmitTextUpload(formValue: NgForm){
+                // this.formulaireService.postArticle(formValue.value).subscribe((res) => {
+
+                //   this.resetForm(formValue);
+                //   this.saved = true;
+
+                // for(let i = 0; i<formValue.value.articleInput.length;i++){
+                //   this.input${i} = formValue.value.articleInput[i].input;
+                //   }
+
+                // console.log(this.el.nativeElement)
+                // console.log(this.data2)
+
+                //   // this.refreshList();
+                // })1
+                // for(let i = 0; i<formValue.value.articleInput.length;i++){
+                // console.log(formValue.value.articleInput[i].input);
+                // // console.log(formValue.value.articleInput.length);
+                // }
+
+                // console.log("salam")
+
+
+                this.data = localStorage.getItem('texte');
+
+                console.log(this.data)
+                formValue.value.texte = this.data;
+
+
+
+                // localStorage.removeItem('texte')
+                console.log(formValue.value)
+                this.document_name = formValue.value.document_name
+                this.values[2] = formValue.value.document_name
+
+                // console.log(formValue.value.document_name)
+                this.texte  = formValue.value.texte ;
+                this.values[4] = formValue.value.texte ;
+
+
+                this.etape2 = false;
+                this.pdf = false;
+                // this.etape3 = true ;
+                this.edit = true;
+
+                localStorage.removeItem('texte')
+                // console.log(this.data)
+                // console.log(this.document_name)
+
+                // console.log(formValue.value.texte)
+
+                }
+
+                onSubmitTextFinal(formValue: NgForm){
+
+
+                  console.log(formValue.value)
+
+                  formValue.value.document_name = this.values[2];
+                  this.texte  = formValue.value.texte ;
+                this.values[4] = formValue.value.texte ;
+
+
+
+                this.edit = false;
+
+                this.etape3 = true;
+
+                }
 
 
   onSubmit(formValue: FormGroup){
@@ -419,6 +504,8 @@ export class ArticleComponent implements OnInit , AfterViewInit {
 
   ngOnInit(): void {
     // this.addNewSearchFields()
+
+    localStorage.removeItem('texte');
 
 
 

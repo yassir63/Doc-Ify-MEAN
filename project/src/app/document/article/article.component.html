@@ -1,230 +1,349 @@
-
 <body class="bg-dark">
 
   <div class="container ">
 
-  <div class="row">
-    <div class="col s12 mt-3 mb-3">
+    <div class="row">
+      <div class="col s12 mt-3 mb-3">
 
-      <div class="card bg-dark">
-        <div class="car-content bg-dark black-text">
-          <div class="row bg-dark ">
+        <div class="card bg-dark">
+          <div class="car-content bg-dark black-text">
+            <div class="row bg-dark ">
 
 
-<!-- First Step -->
+              <!-- First Step -->
 
-            <div *ngIf="!view && etape1 && !etape2 && !etape3 && !etape4" class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
+              <div *ngIf="!view && etape1 && !etape2 && !etape3 && !etape4"
+                class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
 
-<form #formulaire1="ngForm" >
+                <form #formulaire1="ngForm" class="d-flex justify-content-center align-items-center">
 
-                   <div class="text-light">
-                      Veuillez spécifier le nombre d'input que vous souhaitez ( Ne pas dépasser 10 ! )
+                  <div class="text-light">
+                    Veuillez spécifier le nombre d'input que vous souhaitez ( Ne pas dépasser 10 ! )
+                  </div>
+
+                  <div class="form mt-2 mx-2 mb-2">
+                    <input class="form__input" type="number" name="length" [ngModel]="length" />
+                  </div>
+                  <div>
+                    <button type="submit" (click)="onSubmit1(formulaire1)"
+                      class="btn btn-outline-success mx-2">Next</button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Second Step -->
+
+
+
+              <div *ngIf="upload && !view && !etape1 && !etape2 && !etape3 && !etape4 && !pdf && !edit"
+                class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
+
+
+
+
+
+                        <button type="submit" (click)="Upload()"
+                          class="btn btn-outline-success mx-2">Upload</button>
+
+                        <button type="submit" (click)="Saisie()"
+                          class="btn btn-outline-success mx-2">Saisie</button>
+
+
+
+              </div>
+
+
+              <div *ngIf="!view && !etape1 && etape2 && !etape3 && !etape4"
+                class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
+
+
+
+                      <form #formulaire2="ngForm" class="justify-content-center align-items-center">
+
+                        <div class="text-light">
+                          Veuillez entrer le texte Template en HTML ainsi que les champs voulus sous la forme suivante : ##
+                          label of input ##
+                        </div>
+                        <div class="form mt-2 mx-2 mb-2 ">
+
+                          <input class="form__input" type="text" name="document_name" [(ngModel)]="document_name"/>
+                          <label class="form__label">Document Name</label>
+                        </div>
+                        <div class="form-group mb-2">
+                          <textarea class="form-control" name="texte" [ngModel]="texte"></textarea>
+                        </div>
+
+                        <button type="submit" (click)="onSubmitText(formulaire2)"
+                          class="btn btn-outline-success mx-2">Next</button>
+
+                      </form>
+
+
+              </div>
+
+
+              <div *ngIf="!view && !etape1 && !etape3 && !etape4 && pdf"
+                class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
+
+
+
+                      <form #formulaire2="ngForm" class="justify-content-center align-items-center">
+
+                        <div class="text-light">
+                          Veuillez entrer le texte Template en HTML ainsi que les champs voulus sous la forme suivante : ##
+                          label of input ##
+                        </div>
+
+                        <div class="form mt-2 mx-2 mb-2 ">
+
+                          <input class="form__input" type="text" name="document_name" [(ngModel)]="document_name"/>
+                          <label class="form__label">Document Name</label>
+                        </div>
+
+                        <div class="text-light mb-2">
+                          PDF Upload
+                        </div>
+                        <app-file-upload></app-file-upload>
+                        <div class="text-light mb-2">
+                          Image Upload
+                        </div>
+
+                        <app-image-upload>
+
+                        </app-image-upload>
+
+
+
+
+                        <button type="submit" (click)="onSubmitTextUpload(formulaire2)"
+                          class="btn btn-outline-success mx-2">Next</button>
+
+                      </form>
+
+
+              </div>
+
+              <div *ngIf="!view && !etape1 && !etape3 && !etape4 && !etape2 && !pdf && edit"
+                class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
+
+
+
+                      <form #formulaire2="ngForm" class="justify-content-center align-items-center">
+
+                        <div class="text-light">
+                          Veuillez chnager le texte Template en HTML à ce que les champs voulus soient sous la forme suivante : ##
+                          label of input ##
+                        </div>
+
+
+                        <div class="form mt-2 mx-2 mb-2 ">
+
+                          <input class="form__input" type="text" name="document_name" [value]="values[2]"/>
+                          <label class="form__label">Document Name</label>
+                        </div>
+
+                        <textarea class="form-control" name="texte" [ngModel]="texte" [value]="values[4]"></textarea>
+
+
+                        <button type="submit" (click)="onSubmitTextFinal(formulaire2)"
+                          class="btn btn-outline-success mx-2">Next</button>
+
+                      </form>
+
+
+              </div>
+
+              <!-- Third Step -->
+
+
+              <div *ngIf="!view && !etape1 && !etape2 && etape3 && !etape4"
+                class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
+
+                <!-- <form #formulaire2="ngForm" class="justify-content-center align-items-center">
+
+                  <div class="text-light">
+                    Veuillez entrer le texte Template en HTML ainsi que les champs voulus sous la forme suivante : ##
+                    label of input ##
+                  </div>
+
+                  <div class="form mt-2 mx-2 mb-2 ">
+
+                    <input class="form__input" type="text" name="document_name" [(ngModel)]="document_name"/>
+                    <label class="form__label">Document Name</label>
+                  </div>
+                  <div class="form-group mb-2">
+                    <textarea class="form-control" name="texte" [ngModel]="texte"></textarea>
+                  </div>
+
+                  <button type="submit" (click)="onSubmitText(formulaire2)"
+                    class="btn btn-outline-success mx-2">Next</button>
+
+                </form> -->
+                <form [formGroup]="inputType">
+                  <div class="text-light">
+                    Veuillez spécifier le type des inputs que vous souhaitez
+                  </div>
+
+                  <div class="d-flex mb-3" *ngFor="let control of inputType.controls.type['controls']; let i=index"
+                    formArrayName="type">
+
+                    <!-- mandatory to have a in the following line [formGroupName]="i" or else it won t work ! -->
+
+
+
+
+                    <div class="form mt-2 mx-2 mb-2" [formGroupName]="i">
+
+                      <div class="form mt-2 mx-2 mb-4">
+                        <select formControlName="input" class="form-select btn btn-outline-success btn-lg px-6 ">
+                          <option [ngValue]="type" selected disabled hidden>Type</option>
+                          <option value="text">Texte</option>
+                          <option value="number">Number</option>
+                          <option value="hidden">Hidden</option>
+                          <option value="email">Email</option>
+                          <option value="date">Date</option>
+                        </select>
+                      </div>
+
+                      <!-- <input class="form__input" type="text" value="" formControlName="input"/> -->
+
+
                     </div>
 
-                    <div class="form mt-2 mx-2 mb-2">
-                    <input class="form__input" type="number" name="length" [ngModel]="length"/>
                   </div>
-                  <button type="submit" (click)="onSubmit1(formulaire1)" class="btn btn-outline-success mx-2">Next</button>
 
-                        </form>
-</div>
+                  <button type="submit" (click)="onSubmit2(inputType)"
+                    class="btn btn-outline-success mx-2">Next</button>
 
-                              <!-- Second Step -->
-
-
-<div *ngIf="!view && !etape1 && etape2 && !etape3 && !etape4" class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
+                </form>
+              </div>
+              <!-- Fourth Step -->
 
 
+              <div *ngIf="!view && !etape1 && !etape2 && !etape3 && etape4"
+                class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
 
+                <form [formGroup]="articleForm">
 
+                  <div class="d-flex" *ngFor="let control of articleForm.controls.Field['controls']; let i=index"
+                    formArrayName="Field">
 
-                      <!-- <div *ngFor="let i of length" class="form mt-2 mx-2 mb-2">
-                      <input class="form__input" type="number" name="length" [ngModel]="length"/>
-                      </div> -->
-                      <!-- <div class="form mt-2 mx-2 mb-4">
-                        <select name="type_contrat" [(ngModel)]="type_contrat" class="form-select btn btn-outline-success btn-lg px-6 ">
-                            <option [ngValue]="type_contrat" selected disabled hidden>Type De Contrat</option>
-                            <option value="determinée">CDI</option>
-                            <option value="indeterminée">CDD</option>
-                        </select>
-                      </div> -->
-
-                      <form [formGroup]="inputType">
-                        <div class="text-light">
-                          Veuillez spécifier le type des inputs que vous souhaitez
+                    <!-- mandatory to have a in the following line [formGroupName]="i" or else it won t work ! -->
+                    <div [formGroupName]="i">
+                      <div class="form-group col-xs-6">
+                        <div class="form mt-2 mx-2 mb-4">
+                          <input class="form__input" type="text" formControlName="label" />
+                          <label class="form__label">Label</label>
                         </div>
-
-                        <div class="d-flex" *ngFor="let control of inputType.controls.type['controls']; let i=index" formArrayName="type">
-
-                           <!-- mandatory to have a in the following line [formGroupName]="i" or else it won t work ! -->
-
-
-
-
-                          <div class="form mt-2 mx-2 mb-2" [formGroupName]="i">
-
-                            <div class="form mt-2 mx-2 mb-4">
-                        <select formControlName="input" class="form-select btn btn-outline-success btn-lg px-6 ">
+                      </div>
+                      <!--<input class="form__input" type="text" value="free" formControlName="type"/> -->
+                      <div class="form-group col-xs-6">
+                        <div class="form mt-2 mx-2 mb-4">
+                          <select formControlName="type" class="form-select btn btn-outline-success btn-lg px-6 ">
                             <option [ngValue]="type" selected disabled hidden>Type</option>
-                            <option value="text">Texte</option>
-                            <option value="number">Number</option>
-                            <option value="hidden">Hidden</option>
-                            <option value="email">Email</option>
-                            <option value="date">Date</option>
-                        </select>
+                            <option value="free">Libre</option>
+                            <option value="known">Connu</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- <div class="form mt-3 mx-5 "> -->
+                      <div class="form-group col-xs-6">
+                        <div class="form mt-2 mx-2 mb-4">
+                          <input class="form__input" type="{{types[i]}}" formControlName="value" />
+                          <label class="form__label">Value</label>
+                        </div>
+                      </div>
+                      <!-- <div> -->
+                      <div class="form-group col-xs-6">
+                        <div class="form mt-2 mx-2 mb-4">
+                          <input class="form__input" type="text" formControlName="nature" />
+                          <label class="form__label">Nature</label>
+                        </div>
                       </div>
 
-                        <!-- <input class="form__input" type="text" value="" formControlName="input"/> -->
-
-
-                          </div>
-
-                        </div>
-
-                      <button type="submit" (click)="onSubmit2(inputType)" class="btn btn-outline-success mx-2">Next</button>
-
-                          </form>
-  </div>
-
-                              <!-- Third Step -->
-
-
-  <div *ngIf="!view && !etape1 && !etape2 && etape3 && !etape4" class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
-
-    <form #formulaire2="ngForm" >
-
-                       <div class="text-light">
-                          Veuillez entrer le texte Template en HTML ainsi que les champs voulus sous la forme suivante : ## label of input ##
-                        </div>
-
-                        <div class="form mt-2 mx-2 mb-2">
-                        <input class="form__input" type="text" name="document_name" [ngModel]="document_name"/>
-                        <textarea  class="form__input" name="texte" [ngModel]="texte"></textarea>
+                      <br>
+                      <div class="text-light">
+                        <hr>
                       </div>
-                      <button type="submit" (click)="onSubmitText(formulaire2)" class="btn btn-outline-success mx-2">Next</button>
+                      <br>
 
-                            </form>
-    </div>
-                              <!-- Fourth Step -->
+                      <!-- <label class="form__label">{{labels[i]}}</label> -->
 
 
-         <div *ngIf="!view && !etape1 && !etape2 && !etape3 && etape4" class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
-
-    <form [formGroup]="articleForm">
-
-<div class="d-flex" *ngFor="let control of articleForm.controls.Field['controls']; let i=index" formArrayName="Field">
-
-   <!-- mandatory to have a in the following line [formGroupName]="i" or else it won t work ! -->
-<div  [formGroupName]="i">
-  <div class="form-group col-xs-6">    <div class="form mt-2 mx-2 mb-4">
-<input class="form__input" type="text" formControlName="label"/>
-<label class="form__label">Label</label>
-</div>
-</div>
-<!--<input class="form__input" type="text" value="free" formControlName="type"/> -->
-<div class="form-group col-xs-6">
-  <div class="form mt-2 mx-2 mb-4">
-   <select formControlName="type" class="form-select btn btn-outline-success btn-lg px-6 ">
-      <option [ngValue]="type" selected disabled hidden>Type</option>
-      <option value="free">Libre</option>
-      <option value="known">Connu</option>
-  </select>
-  </div>
-</div>
-<!-- <div class="form mt-3 mx-5 "> -->
-  <div class="form-group col-xs-6">
-    <div class="form mt-2 mx-2 mb-4">
-<input class="form__input" type="{{types[i]}}"  formControlName="value"/>
-<label class="form__label">Value</label>
-</div>
-</div>
-<!-- <div> -->
-  <div class="form-group col-xs-6">
-    <div class="form mt-2 mx-2 mb-4">
-<input class="form__input" type="text"  formControlName="nature"/>
-<label class="form__label">Nature</label>
-</div>
-</div>
-
-<br>
-<div class="text-light">
-  <hr>
-</div>
-<br>
-
-<!-- <label class="form__label">{{labels[i]}}</label> -->
-
-
-</div>
-  <!-- <button style="margin-top:12px;height:40px;" class="btn btn-outline-danger" (click)="removeInput(i)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
-
-</div>
-
-
-<!-- <button class="btn btn-outline-secondary" (click)="addInput()">Add Input </button> -->
-
-                      <button type="submit" [disabled]="!articleForm.valid" (click)="onSubmit(articleForm)" class="btn btn-outline-success mx-2">Save</button>
-                      <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">Reset</button> -->
-                      <!-- <button type="submit" (click)="seeChanges(articleForm)" class="btn btn-outline-warning mx-2"><i class="fa fa-eye" aria-hidden="true"></i></button>  -->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-                     <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">Voir Mon Document</button> -->
-                    </form>
+                    </div>
+                    <!-- <button style="margin-top:12px;height:40px;" class="btn btn-outline-danger" (click)="removeInput(i)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
 
                   </div>
 
 
-</div>
+                  <!-- <button class="btn btn-outline-secondary" (click)="addInput()">Add Input </button> -->
 
-            <div *ngIf="view && !etape2 && !etape3 && !etape4" class=" col s6 mx-3 mt-4 shadow p-2 mb-3 bg-dark rounded">
-              <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">Générer PDF</button>
-              <span style="padding-left:10px;color:white;">Please paste your HTML Code Here ! / You can modify the following Text as you wish and generate a PDF ! ( Click anywhere on the file ! )</span>
+                  <button type="submit" [disabled]="!articleForm.valid" (click)="onSubmit(articleForm)"
+                    class="btn btn-outline-success mx-2">Save</button>
+                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">Reset</button>
+                  -->
+                  <!-- <button type="submit" (click)="seeChanges(articleForm)" class="btn btn-outline-warning mx-2"><i class="fa fa-eye" aria-hidden="true"></i></button>  -->
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
 
-                <div style="margin:10px;"  class="scroll form-control">
+                  <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">Voir
+                    Mon Document</button> -->
+                </form>
+
+              </div>
+
+
+            </div>
+
+            <div *ngIf="view && !etape2 && !etape3 && !etape4"
+              class=" col s6 mx-3 mt-4 shadow p-2 mb-3 bg-dark rounded">
+              <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">Générer
+                PDF</button>
+              <span style="padding-left:10px;color:white;">Please paste your HTML Code Here ! / You can modify the
+                following Text as you wish and generate a PDF ! ( Click anywhere on the file ! )</span>
+
+              <div style="margin:10px;" class="scroll form-control">
                 <div style="height:auto; margin:10px;" #article>
-                <div contenteditable="true" [innerHTML]="texte">
+                  <div contenteditable="true" [innerHTML]="texte">
 
-                  <!-- <app-helper [value]="inputData"></app-helper> -->
-
-
-                  <!-- <app-helper [type]="inputData"></app-helper> -->
-                  <!-- {{data2}} -->
-
-<!-- <input value="{{input1}}"/> -->
-
-<!-- <div #host></div> -->
-
-<!-- {{database}} -->
+                    <!-- <app-helper [value]="inputData"></app-helper> -->
 
 
-                   <!-- {{data}} -->
-                  <!-- {{articleForm.controls.articleInput.length}} -->
+                    <!-- <app-helper [type]="inputData"></app-helper> -->
+                    <!-- {{data2}} -->
 
-                  <!-- {{articleForm.value.articleInput | json}} -->
+                    <!-- <input value="{{input1}}"/> -->
+
+                    <!-- <div #host></div> -->
+
+                    <!-- {{database}} -->
 
 
-                 <!--  {{input1}}
+                    <!-- {{data}} -->
+                    <!-- {{articleForm.controls.articleInput.length}} -->
+
+                    <!-- {{articleForm.value.articleInput | json}} -->
+
+
+                    <!--  {{input1}}
                   {{input2}}
                   {{input3}}
                   {{input4}}
                   {{input5}} -->
-<!--
+                    <!--
                   <template
     [ngComponentOutlet]="inputData"></template> -->
 
 
-    <!-- <app-dcl-wrapper [type]="types[0]"></app-dcl-wrapper> -->
+                    <!-- <app-dcl-wrapper [type]="types[0]"></app-dcl-wrapper> -->
 
-    <!-- <app-dcl-wrapper [type]="types[1]" ></app-dcl-wrapper> -->
+                    <!-- <app-dcl-wrapper [type]="types[1]" ></app-dcl-wrapper> -->
 
-    <!-- <app-data [data1]="input1" [data2]="input2"></app-data> -->
-
-
+                    <!-- <app-data [data1]="input1" [data2]="input2"></app-data> -->
 
 
 
@@ -233,17 +352,16 @@
 
 
 
+
+
+
+                  </div>
 
                 </div>
-
               </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
     </div>
   </div>
-
-
-

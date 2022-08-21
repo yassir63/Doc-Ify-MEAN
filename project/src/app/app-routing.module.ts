@@ -6,6 +6,8 @@ import { ContratTravailComponent } from './document/contrat-travail/contrat-trav
 import { ConventionStageComponent } from './document/convention-stage/convention-stage.component';
 import { DocumentComponent } from './document/document.component';
 import { GeneralComponent } from './document/general/general.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
