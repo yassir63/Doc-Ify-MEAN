@@ -8,6 +8,7 @@ var Template = mongoose.model('Template',{
    texte:{type: String},
    fields: [{type: String}],
    field_nature: [{type: String}],
+   field_types: [{type: String}]
 });
 
 

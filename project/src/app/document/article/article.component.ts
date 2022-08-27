@@ -40,9 +40,14 @@ export class ArticleComponent implements OnInit , AfterViewInit {
   type='';
   texte='';
 
-
+  nature = [''];
   types = ['']; // finish this and the one after ! in order to add these inputs !
   labels = ['id','user','document_name','date_ecriture','texte ( put the HTML code )']
+  champs : boolean[] = [false,false,false,false,false]
+
+  select : any[] = [];
+
+
   values = [this.id,this.user,this.document_name,'',this.texte]
   stg:any = {};
   saved : boolean = false;
@@ -55,6 +60,11 @@ export class ArticleComponent implements OnInit , AfterViewInit {
   pdf : boolean = false;
   edit : boolean = false;
 
+
+  state: any = [];
+  city: any = [];
+
+  country!: any[];
 
   // types = [DataComponent, DataComponent];
 
@@ -139,10 +149,20 @@ export class ArticleComponent implements OnInit , AfterViewInit {
   inputType = this.formBuilder.group({
     'type' : new FormArray([
       this.formBuilder.group({
-        'input' : new FormControl('')
+        'input' : new FormControl(''),
+        'choice': new FormControl(''),
+        'label': new FormControl('')
     })
   ])
   })
+
+  // inputChoice = this.formBuilder.group({
+  //   'choice' : new FormArray([
+  //     this.formBuilder.group({
+  //       'choix' : new FormControl('')
+  //   })
+  // ])
+  // })
 
   getInput() : FormArray{
     return this.articleForm.get('Field') as FormArray;
@@ -226,6 +246,8 @@ export class ArticleComponent implements OnInit , AfterViewInit {
             let inputArr = this.inputType.get('type') as FormArray;
             let newInput = this.formBuilder.group({
             'input' : '',
+            'choice': '',
+            'label':''
             })
             inputArr.push(newInput);
           }
@@ -256,22 +278,87 @@ export class ArticleComponent implements OnInit , AfterViewInit {
               this.types[i+5] = formValue.value.type[i].input;
             }
 
+            for(let i=0;i<this.length;i++){
+              console.log(formValue.value.type[i].choice)
+              var test = formValue.value.type[i].choice;
+              this.champs[i+5] = (test == 'true')
+              console.log(this.champs[i])
+            }
+
+
+
+            for(let i=0;i<this.length;i++){
+              this.labels[i+5] = formValue.value.type[i].label;
+            }
+
+
+
+
+
+// maybe un tableau de different data ?
+            // we need a way so that data can be shown in every formArray seperatly from others !
+
+            console.log(this.champs)
+
             for(let i = 1; i<this.length+5;i++){
               let inputArr = this.articleForm.get('Field') as FormArray;
+              // this.choice = this.champs[i];
+              // console.log(this.champs[i])
+              // if(this.champs[i] === true){
+
+              //   let newInput = this.formBuilder.group({
+              //     'label' : this.labels[i],
+              //     'value' : this.values[i],
+              //     'type' : 'known',
+              //     'nature':this.types[i]
+              //     })
+              //     inputArr.push(newInput);
+              // }else{
+              //   let newInput = this.formBuilder.group({
+              //     'label' : this.labels[i],
+              //     'value' : this.values[i],
+              //     'type' : '',
+              //     'nature':this.types[i]
+              //     })
+              //     inputArr.push(newInput);
+              // }
+              if(this.champs[i] == true){
+              this.formulaireService.getField(this.labels[i]).subscribe((data: any) => {
+                this.country = data;
+                // console.log(data)
+                // console.log('salam')
+                // console.log(this.select)
+                this.select[i] = this.country;
+                this.nature[i] = 'known';
+                // console.log(this.select)
+              });
+
+            }else{
+              this.nature[i]='free';
+            }
+
+
               let newInput = this.formBuilder.group({
-              'label' : this.labels[i],
-              'value' : this.values[i],
-              'type' : '',
-              'nature':this.types[i]
-              })
+                'label' : this.labels[i],
+                'value' : this.values[i],
+                'type' : '',
+                'nature':this.types[i]
+                })
+
+                inputArr.push(newInput);
 
 
-              inputArr.push(newInput);
+
+
             }
 
             // console.log(formValue.value.type[2].input)
 
             }
+
+
+
+
 
 
             Upload(){
@@ -400,6 +487,20 @@ export class ArticleComponent implements OnInit , AfterViewInit {
                 }
 
 
+champ="";
+choice : boolean = false;
+
+  onSelect(){
+    console.log("changed")
+    console.log(this.champ)
+    if(this.champ == "free"){
+      this.choice = false;
+    }else if(this.champ == "known"){
+      this.choice = true;
+    }
+  }
+
+
   onSubmit(formValue: FormGroup){
     this.formulaireService.postTemplate(formValue.value).subscribe((res) => {
 
@@ -421,7 +522,7 @@ export class ArticleComponent implements OnInit , AfterViewInit {
     })
 
     for(let i=0;i<formValue.value.Field.length;i++){
-      this.texte = this.texte.replace('## ' + formValue.value.Field[i].label + ' ##',formValue.value.Field[i].value) // does n twork , why ??
+      this.texte = this.texte.replace('## ' + formValue.value.Field[i].label + ' ##',formValue.value.Field[i].value) // doesn't work , why ??
     }
 
 // console.log(formValue.value.Field.length)

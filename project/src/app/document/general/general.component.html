@@ -29,7 +29,11 @@
 
 
 <!-- [(ngModel)]="company_name" -->
-<input class="form__input" type="{{nature[i]}}"  formControlName="value"/>
+<input *ngIf="!champs[i]" class="form__input" type="{{nature[i]}}"  formControlName="value"/>
+<select *ngIf="champs[i]" formControlName="value"class="form-select btn btn-outline-success btn-lg px-6 ">
+  <option *ngFor="let cities of
+  select[i]">{{cities.value}}</option>
+</select>
 
 <label class="form__label">{{labels[i]}}</label>
 

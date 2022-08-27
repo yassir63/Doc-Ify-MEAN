@@ -29,9 +29,9 @@ export class ContratTravailComponent implements OnInit {
   id= new ObjectID;
   id_str = this.id.toString();
 
-  types = ['hidden','hidden','hidden','date','text','text','text','number','date','text','text','text','text'];
-  labels = ['id','user','document_name','date_ecriture','employeur', 'nom_stagiaire', 'societe', 'renumeration', 'date_debut_contrat', 'type_contrat','ville_ecriture','salarie','adresse_societe']
-  values = [this.id,this.user,this.document_name,this.date_ecriture,this.employeur, this.nom_stagiaire, this.societe, this.renumeration, this.date_debut_contrat, this.type_contrat,this.ville_ecriture,this.salarie,this.adresse_societe]
+  types = ['hidden','hidden','hidden','date','text','text','number','date','text','text','text','text'];
+  labels = ['id','user','document_name','date_ecriture','employeur','societe', 'renumeration', 'date_debut_contrat', 'type_contrat ( CDI / CDD )','ville_ecriture','salarie','adresse_societe']
+  values = [this.id,this.user,this.document_name,this.date_ecriture,this.employeur, this.societe, this.renumeration, this.date_debut_contrat, this.type_contrat,this.ville_ecriture,this.salarie,this.adresse_societe]
 
 
   stg:any = {};
@@ -88,14 +88,13 @@ export class ContratTravailComponent implements OnInit {
         this.document_name= this.stg.fields[2].value;
         this.date_ecriture= this.stg.fields[3].value;
         this.employeur= this.stg.fields[4].value;
-         this.nom_stagiaire= this.stg.fields[5].value;
-          this.societe= this.stg.fields[6].value;
-           this.renumeration= this.stg.fields[7].value;
-            this.date_debut_contrat= this.stg.fields[8].value;
-             this.type_contrat= this.stg.fields[9].value;
-             this.ville_ecriture= this.stg.fields[10].value;
-             this.salarie= this.stg.fields[11].value;
-             this.adresse_societe= this.stg.fields[12].value;
+          this.societe= this.stg.fields[5].value;
+           this.renumeration= this.stg.fields[6].value;
+            this.date_debut_contrat= this.stg.fields[7].value;
+             this.type_contrat= this.stg.fields[8].value;
+             this.ville_ecriture= this.stg.fields[9].value;
+             this.salarie= this.stg.fields[10].value;
+             this.adresse_societe= this.stg.fields[11].value;
 
 
         console.log(data)
@@ -149,14 +148,13 @@ export class ContratTravailComponent implements OnInit {
         this.document_name= this.stg.fields[2].value;
         this.date_ecriture= this.stg.fields[3].value;
         this.employeur= this.stg.fields[4].value;
-         this.nom_stagiaire= this.stg.fields[5].value;
-          this.societe= this.stg.fields[6].value;
-           this.renumeration= this.stg.fields[7].value;
-            this.date_debut_contrat= this.stg.fields[8].value;
-             this.type_contrat= this.stg.fields[9].value;
-             this.ville_ecriture= this.stg.fields[10].value;
-             this.salarie= this.stg.fields[11].value;
-             this.adresse_societe= this.stg.fields[12].value;
+          this.societe= this.stg.fields[5].value;
+           this.renumeration= this.stg.fields[6].value;
+            this.date_debut_contrat= this.stg.fields[7].value;
+             this.type_contrat= this.stg.fields[8].value;
+             this.ville_ecriture= this.stg.fields[9].value;
+             this.salarie= this.stg.fields[10].value;
+             this.adresse_societe= this.stg.fields[11].value;
         });
 
 

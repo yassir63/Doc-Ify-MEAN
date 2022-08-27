@@ -3,7 +3,8 @@ var router = express.Router();
 const { ObjectID } = require('bson');
 const mongoose = require('../db.js')
 const  connectDB  = require('../db2.js');
-
+const { Nationality } = require('../models/nationality.js')
+const { Ville } = require('../models/ville.js')
 
 var { Field } = require('../models/fields.js');
 
@@ -15,6 +16,9 @@ const DocumentSchemas = new Map([['documents', docSchema]]);
 
 
 const Docs = ["contrat-travail","convention-stage"]
+
+var {MongoClient }= require('mongodb');
+var db;
 
 
        /** Switche to db on same connection pool
@@ -43,9 +47,42 @@ const Docs = ["contrat-travail","convention-stage"]
                 return db.model(modelName)
               }
     
-        
+router.get('/known/:collection', async(req,res) => {
 
+// Initialize connection once
+// MongoClient.connect("mongodb://localhost:27017/Projectnew", (err, database) => {
+//   // if(err) throw err;
 
+//   db = database;
+//   console.log(database)
+//   console.log(db)
+
+//   // Start the application after the database connection is ready;
+// });
+
+const client = new MongoClient('mongodb://localhost:27017')
+await client.connect();
+const db = client.db('Projectnew')
+  // console.log(req.params.collection);
+  // const user = await getDBModel(mongoose,req.params.collection);
+  // console.log(mongoose)
+  // console.log(user.find())
+  // console.log(user)
+  // const result = await user.find();
+  //     res.send(result);
+  const result = await db.collection(req.params.collection).find({}).toArray();  // db.collection('Nationality').find({}, function(err, docs) {
+  //   console.log('salam')
+  //   console.log(docs)
+  //   res.send(docs)
+  //   });
+
+  // const result = collection.find();
+  // console.log(result)
+  res.send(result)
+});
+              
+
+              
 
 router.get('/', (req,res) => {
     Field.find((err,docs) => {
@@ -55,6 +92,7 @@ router.get('/', (req,res) => {
     });
     // mongoose.connection.close();
 });
+
 
 // router.post('/document', (req,res) => {
 //     var doc = new Document ({
@@ -462,5 +500,7 @@ const tenantDB = await switchDB(`${req.body.Field[1].value}`, DocumentSchemas)  
 //         else { console.log('Error in deleting Employee !' + JSON.stringify(err,undefined,2));
 //     }});
 // });
+
+
 
 module.exports = router;

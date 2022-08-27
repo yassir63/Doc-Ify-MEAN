@@ -35,6 +35,13 @@ export class GeneralComponent implements OnInit {
   etape4 : boolean = false;
   view : boolean = false;
   show : boolean = false;
+  country: any;
+
+  select : any[] = [];
+  choice : boolean = false;
+
+  champs : boolean[] = [false,false,false,false,false]
+
 
 
 
@@ -159,30 +166,61 @@ this.texte = this.stg.texte;
         this.nature[i] = this.stg.field_nature[i];
       }
 
-      // for(let i = 0;i<this.stg.field_types.length;i++){
-      //   this.types[i] = this.stg.field_types[i];
+      // for(let i = 0;i<this.stg.field_nature.length;i++){
+      //   this.nature[i] = this.stg.field_type[i];
       // }
+
+      for(let i = 0;i<this.stg.field_types.length;i++){
+        this.types[i] = this.stg.field_types[i];
+      }
 
 
 
       console.log(this.labels)
       console.log(this.nature)
-      // console.log(this.types)
+      console.log(this.types)
 
 
       for(let i = 1; i<this.length;i++){
         let inputArr = this.articleForm.get('Field') as FormArray;
+
+        if(this.types[i] == 'known'){
+          this.champs[i] = true;
+          // this.choice = true;
         let newInput = this.formBuilder.group({
         'label' : this.labels[i],
         'value' : this.values[i],
         'type' : this.types[i],
         'nature':this.nature[i]
         })
+        this.formulaireService.getField(this.labels[i]).subscribe((data: any) => {
+          this.country = data;
+          // console.log(data)
+          // console.log('salam')
+          // console.log(this.select)
+          this.select[i] = this.country;
+          this.nature[i] = 'known';
+          // console.log(this.select)
+        });
+        inputArr.push(newInput);
+      }else{
+        // this.choice = false;
+        this.champs[i] = false;
+        let newInput = this.formBuilder.group({
+          'label' : this.labels[i],
+          'value' : this.values[i],
+          'type' : this.types[i],
+          'nature':this.nature[i]
+          })
+          inputArr.push(newInput);
+      }
+
+
         // if(this.types[i] != 'hidden'){
         //   this.show = false;
         // }
 
-        inputArr.push(newInput);
+
       }
 
 

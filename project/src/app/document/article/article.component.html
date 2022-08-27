@@ -191,10 +191,9 @@
 
 
 
-
-                    <div class="form mt-2 mx-2 mb-2" [formGroupName]="i">
-
-                      <div class="form mt-2 mx-2 mb-4">
+<div [formGroupName]="i">
+  <div class="form-group col-xs-6">
+    <div class="form mt-2 mx-2 mb-4">
                         <select formControlName="input" class="form-select btn btn-outline-success btn-lg px-6 ">
                           <option [ngValue]="type" selected disabled hidden>Type</option>
                           <option value="text">Texte</option>
@@ -204,13 +203,39 @@
                           <option value="date">Date</option>
                         </select>
                       </div>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <div class="form mt-2 mx-2 mb-4">
+                        <select formControlName="choice" class="form-select btn btn-outline-success btn-lg px-6 ">
+                          <option [ngValue]="type" selected disabled hidden>Choix</option>
+                          <option value="true">Connu</option>
+                          <option value="false">Libre</option>
 
-                      <!-- <input class="form__input" type="text" value="" formControlName="input"/> -->
-
-
+                        </select>
+                      </div>
                     </div>
 
+
+                      <div class="form-group col-xs-6">
+                        <div class="form mt-2 mx-2 mb-4">
+                          <input class="form__input" type="text" formControlName="label" />
+                          <label class="form__label">Label</label>
+                        </div>
+                      </div>
+
+
+
+                    <br>
+                    <div class="text-light">
+                      <hr>
+                    </div>
+                    <br>
                   </div>
+                      <!-- <input class="form__input" type="text" value="" formControlName="input"/> -->
+                    </div>
+
+
+
 
                   <button type="submit" (click)="onSubmit2(inputType)"
                     class="btn btn-outline-success mx-2">Next</button>
@@ -228,6 +253,7 @@
                   <div class="d-flex" *ngFor="let control of articleForm.controls.Field['controls']; let i=index"
                     formArrayName="Field">
 
+
                     <!-- mandatory to have a in the following line [formGroupName]="i" or else it won t work ! -->
                     <div [formGroupName]="i">
                       <div class="form-group col-xs-6">
@@ -239,7 +265,7 @@
                       <!--<input class="form__input" type="text" value="free" formControlName="type"/> -->
                       <div class="form-group col-xs-6">
                         <div class="form mt-2 mx-2 mb-4">
-                          <select formControlName="type" class="form-select btn btn-outline-success btn-lg px-6 ">
+                          <select formControlName="type" (change)=onSelect() class="form-select btn btn-outline-success btn-lg px-6 ">
                             <option [ngValue]="type" selected disabled hidden>Type</option>
                             <option value="free">Libre</option>
                             <option value="known">Connu</option>
@@ -247,10 +273,23 @@
                         </div>
                       </div>
                       <!-- <div class="form mt-3 mx-5 "> -->
-                      <div class="form-group col-xs-6">
+                      <div class="form-group col-xs-6" *ngIf="!champs[i]">
                         <div class="form mt-2 mx-2 mb-4">
                           <input class="form__input" type="{{types[i]}}" formControlName="value" />
                           <label class="form__label">Value</label>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-6" *ngIf="champs[i]">
+                        <div class="form mt-2 mx-2 mb-4">
+                          <!-- <select formControlName="value" class="form-select btn btn-outline-success btn-lg px-6 ">
+                            <option [ngValue]="type" selected disabled hidden>Type</option>
+                            <option value="dawla1">dawla 1</option>
+                            <option value="dawla2">dawla 2</option>
+                          </select> -->
+                          <select formControlName="value"class="form-select btn btn-outline-success btn-lg px-6 ">
+                            <option *ngFor="let cities of
+                            select[i]">{{cities.value}}</option>
+                          </select>
                         </div>
                       </div>
                       <!-- <div> -->

@@ -14,7 +14,8 @@ const { createWorker } = require('tesseract.js');
 
 
 converter = new showdown.Converter();
-
+const { Nationality } = require('./models/nationality')
+const { Ville } = require('./models/ville')
 const { mongoose } = require('./db.js');
 var app = express();
 require('dotenv').config()
@@ -215,6 +216,37 @@ app.post('/api/upload', upload.single('image'), async function (req, res) {
 
 
 
+  
+
+
   app.get('/api/upload/get', (req,res) => {
     res.send({content: texte});
   })
+
+// field known !
+
+  const getModel= async (modelName)=>{
+    return mongoose.model(modelName);
+ }
+
+// app.get('/known/:user', async(req,res) => {
+//     console.log(req.params.user);
+//     const user = await getModel(req.params.user);
+//     // console.log(user.find())
+//     const result = await user.find();
+//         res.send(result);
+// });
+
+// app.post('/known/:user', async(req,res) => {
+//   console.log(req.params.user);
+//   // const user = await getModel(req.params.user);
+//   // console.log(user.find())
+//   // const result = await user.find();
+//       // res.send(result);
+//       const field = new Nationality({
+//         _id : 'uihdkjhksdk',
+//         value : 'test'
+//       })
+
+//       field.save();
+// });

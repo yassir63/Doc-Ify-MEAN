@@ -30,6 +30,12 @@ export class FormulaireService {
     return this.http.get(this.path + `/${id}` + `/${user}`);
   }
 
+  getField(text:string){
+    //console.log(this.path);
+   return this.http.get(this.path + `/known/${text}`);
+
+ }
+
 
   getTemplate(id:any,docname:any){
     return this.http.get('http://localhost:3000/dashboard/template'+ `/${id}` + `/${docname}`);
