@@ -4,12 +4,9 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const secretKey = "ezgfjkzfozelfzmjfmoze" // you can choose to do npm i dotenv and have an env file and store it there !
 const authModelSchema = require('../models/authModel')
-const verifyToken = require('../verifyToken')
-const  connectDB  = require('../db2.js');
+const verifyToken = require('../services/verifyToken')
+const  connectDB  = require('../services/db2.js');
 const mongoose = require('mongoose')
-
-
-// const connectDB = require('../services/mongo.connect.js')
 const TenantSchema = require('../models/tenantSchema.js')
 const DocSchema = require('../models/docSchema.js')
 const { ObjectID } = require('bson')
@@ -54,32 +51,25 @@ const TenantSchemas = new Map([['tenant', TenantSchema]])
   const initDocs = async () => {
     const customers = await getAllTenants()
     const createDocuments = customers.map(async (tenant) => {
-      const userDB = await switchDB(tenant.username, DocumentSchemas)    // create databse with document collection !
-      // const documentModel = await getDBModel(userDB, 'documents')
-    //   await documentModel.deleteMany({})
-    //   return documentModel.create({
-    //     docId: new ObjectID,
-    //     name: 'John',
-    //     date: '23/6/2019',
-    //   })
-    // })
-    // const results = await Promise.all(createDocuments)
+      const userDB = await switchDB(tenant.username, DocumentSchemas)    // create database with document collection !
   })
   }
   
   const getAllTenants = async () => {
     const tenantDB = await switchDB('Projectnew', AuthSchemas)  // Project + authUsers
     const tenantModel = await getDBModel(tenantDB, 'authUsers')
-    const tenants = await tenantModel.find({}) // return different users in our case !
+    const tenants = await tenantModel.find({}) // returns different users in our case !
     return tenants
   }
 
+
+
+  // app login 
 
 router.post('/login', async(req,res) => {
 
     const username = req.body?.email
     const password = req.body?.password
-    // console.log('details', username, password);
     const tenantDB = await switchDB('Projectnew', AuthSchemas)   // Project + authUsers
     const tenant = await getDBModel(tenantDB, 'authUsers')
     if(username && password) {
@@ -87,20 +77,14 @@ router.post('/login', async(req,res) => {
         if(existUser && existUser._id) {
             bcrypt.compare(password, existUser?.password, async function(err, response) {
                 if(!err && response) {
-                //    const auth = jwt.sign(
-                //        { user_id: existUser._id, username },
-                //        'secretKey'
-                //      );
-
+   
                 const authToken = jwt.sign({_id : existUser._id , email : existUser.email} , secretKey , {
                     expiresIn : '1h'
                 })
-                // const tenantDB = await switchDB(existUser.username, DocumentSchemas) 
-                // mongoose.disconnect();
-                // mongoose.connection.close();
+   
                 
                    res.json({status: 'ok',loginUser : true, data: {existUser , response ,authToken}});
-                  //  mongoose.connection.close();
+     
                    return;
                 } else {
                    res.json({status: 'warn', loginUser : false, data: 'Please enter valid password'});
@@ -120,6 +104,8 @@ router.post('/login', async(req,res) => {
 });
 
 
+// app token verification and dashboard access 
+
 router.get('/dashboard', verifyToken , async (req,res) => {
     if(req && req.decodedToken){
         res.json({status : 'ok', data : 'ok'})
@@ -131,11 +117,16 @@ router.get('/dashboard', verifyToken , async (req,res) => {
 })
 
 
+// app registration !
+
+// this also create a database for the registered user !
+// at the moment it uses his name wich is not unique, though we can use anything we want even an id would work !
+
 router.post('/register', async(req,res) => {
     const registerUserData = {
         username: req.body.username,
         email : req.body.email,
-        password : req.body.password | String, // hein ?
+        password : req.body.password | String, 
         gender : req.body.gender,
         dob : req.body.dob,
         documents : new ObjectID
@@ -153,7 +144,7 @@ router.post('/register', async(req,res) => {
   const initTennants  = async () => {
     const tenantDB = await switchDB('Projectnew', AuthSchemas)   // Project + authUsers
     const tenant = await getDBModel(tenantDB, 'authUsers')
-    // await tenant.deleteMany({})
+
     await tenant.create(registerUserData).then(userStoredData => {
         if(userStoredData && userStoredData._id) {
             console.log('user stored data' , userStoredData)

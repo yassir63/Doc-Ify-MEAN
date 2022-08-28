@@ -32,11 +32,6 @@ const routes: Routes = [
     children:[
       {
         path : 'convention-stage', component : ConventionStageComponent,
-        // children:[
-        // {
-        //   path : ':id', component : DocumentComponent
-        // },
-      // ]
       },
       {
         path : 'contrat-travail', component : ContratTravailComponent
@@ -50,9 +45,6 @@ const routes: Routes = [
       {
         path : ':id/:docname', component : GeneralComponent
       }
-
-
-
     ]
   }
 ];

@@ -1,40 +1,37 @@
 <app-header></app-header>
-<div class="container pt-4" >
+<div class="container pt-4">
   <div class="row pb-2">
     <div class="text-right">
       <button mat-raised-button (click)="onLogout()" color="light">LogOut</button>
     </div>
   </div>
   <mat-card class="mb-2">
-    <!-- <div>We are in Dashboard !</div> -->
+
     <div>We are in Dashboard ! Welcome {{username}}</div>
 
-        <button routerLink="/documents/contrat-travail" style="margin:10px;" class="btn btn-primary">Contrat de Travail</button>
+    <button routerLink="/documents/contrat-travail" style="margin:10px;" class="btn btn-primary">Contrat de
+      Travail</button>
 
-        <button routerLink="/documents/convention-stage" class="btn btn-primary">Convention de Stage</button>
+    <button routerLink="/documents/convention-stage" class="btn btn-primary">Convention de Stage</button>
 
-        <button routerLink="/documents/create" style="margin:10px;" class="btn btn-secondary">Make a Template</button>
-
-
-        <div>Custom Templates :</div>
-        <ul>
-          <li *ngFor="let temp of templates"><button style="margin:10px;" mat-raised-button (click)="getTemp(temp._id,temp.name)" color="accent">{{ temp.name }}</button></li>
-      </ul>
+    <button routerLink="/documents/create" style="margin:10px;" class="btn btn-secondary">Make a Template</button>
 
 
+    <div>Custom Templates :</div>
+    <ul>
+      <li *ngFor="let temp of templates"><button style="margin:10px;" mat-raised-button
+          (click)="getTemp(temp._id,temp.name)" color="accent">{{ temp.name }}</button></li>
+    </ul>
 
 
-        <div>My Documents :</div>
-        <ul>
-          <li *ngFor="let doc of mesdocs"><button style="margin:10px;" mat-raised-button (click)="getDoc(doc._id,doc.name)" color="accent">{{ doc.name }} / {{doc.date}}</button></li>
-      </ul>
 
-      <div>My Templates :</div>
-        <ul>
-          <!-- <li *ngFor="let doc of mesdocs"><button style="margin:10px;" mat-raised-button (click)="getDoc(doc.fields,doc.name)" color="accent">{{ doc.name }} / {{doc.date}}</button></li> -->
-      </ul>
 
-        <!-- {{ mesdocs | json}} -->
+    <div>My Documents :</div>
+    <ul>
+      <li *ngFor="let doc of mesdocs"><button style="margin:10px;" mat-raised-button (click)="getDoc(doc._id,doc.name)"
+          color="accent">{{ doc.name }} / {{doc.date}}</button></li>
+    </ul>
+
 
 
 

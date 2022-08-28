@@ -1,3 +1,9 @@
+
+// Authentification Token Verification !
+
+
+
+
 const jwt = require('jsonwebtoken')
 const secretKey = "ezgfjkzfozelfzmjfmoze" // you can choose to do npm i dotenv and have an env file and store it there !
 

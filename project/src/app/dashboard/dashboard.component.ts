@@ -10,68 +10,71 @@ import { FormulaireService } from '../shared/formulaire.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public apicallService : ApicallService,public formulaireService : FormulaireService, public route : Router) { }
+  constructor(public apicallService: ApicallService, public formulaireService: FormulaireService, public route: Router) {}
 
   username = localStorage.getItem('user');
-  mesdocs:any = {};
-  templates:any={};
+  mesdocs: any = {};
+  templates: any = {};
 
 
   ngOnInit(): void {
-    if(localStorage.getItem('token')) {
-      this.apicallService.gotoDashboard(localStorage.getItem('token')).subscribe((res:any) => {
+    if (localStorage.getItem('token')) {
+      this.apicallService.gotoDashboard(localStorage.getItem('token')).subscribe((res: any) => {
         console.log(res)
-        if (res && res['status'] === 'ok'){
+        if (res && res['status'] === 'ok') {
           console.log("We are In Dashboard !")
-        }else{
+        } else {
           console.log('something went wrong in dashboard ... !')
         }
-        }, (err)=>{
-          if(err){
-            console.log("We have got an error !")
-          }
+      }, (err) => {
+        if (err) {
+          console.log("We have got an error !")
+        }
       })
     }
 
 
-    this.apicallService.mydocs(this.username,null).subscribe((res:any) => {
+    this.apicallService.mydocs(this.username, null).subscribe((res: any) => {
       this.mesdocs = res;
-      console.log(this.mesdocs)
     })
 
-      this.apicallService.templates(this.username,null).subscribe((res:any) => {
-        this.templates = res;
-        console.log(this.templates)
-})
-}
-
-
-  getDoc(id:string,docname:any){
-
-
-      // this.stg = data;
-      this.route.navigate([`documents/${docname}`],{ queryParams: { view: true , id : id, docname : docname , user : this.username} }) // does not work
-
-
-    // this.view = true;
+    this.apicallService.templates(this.username, null).subscribe((res: any) => {
+      this.templates = res;
+    })
   }
 
 
-  getTemp(id:string,docname:any){
+  getDoc(id: string, docname: any) {
+
+    this.route.navigate([`documents/${docname}`], {
+      queryParams: {
+        view: true,
+        id: id,
+        docname: docname,
+        user: this.username
+      }
+    })
+
+  }
 
 
-    // this.stg = data;
-    this.route.navigate([`documents/${id}/${docname}`],{ queryParams: { view: true , id : id, docname : docname ,user : this.username} }) // does not work
+  getTemp(id: string, docname: any) {
+
+    this.route.navigate([`documents/${id}/${docname}`], {
+      queryParams: {
+        view: true,
+        id: id,
+        docname: docname,
+        user: this.username
+      }
+    })
+
+  }
 
 
-  // this.view = true;
-}
-
-
-  onLogout(){
+  onLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-
     this.route.navigate(['login'])
   }
 

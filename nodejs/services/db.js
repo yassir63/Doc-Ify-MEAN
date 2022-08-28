@@ -1,3 +1,9 @@
+
+
+
+// database normal connection !
+// direct connection !
+
 const mongoose = require('mongoose');
 
 mongoose.createConnection('mongodb://localhost:27017/Projectnew', (err) => {
@@ -6,7 +12,6 @@ mongoose.createConnection('mongodb://localhost:27017/Projectnew', (err) => {
     else
     console.log('Connection Failed !' + JSON.stringify(err, undefined,2));
 })
-
 
   
 

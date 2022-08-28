@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const  connectDB  = require('../db2.js');
+const  connectDB  = require('../services/db2.js');
 const mongoose = require('mongoose')
 
 const docSchema = require('../models/docSchema.js');
@@ -34,54 +34,40 @@ var { Template } = require('../models/template.js');
                 return db.model(modelName)
               }
     
+
+  
+  // this gets the different templates registered in the app 
+
+
 router.get('/templates', async (req,res) => {
 
   const temps = await Template.find({})
-
-  // console.log(req.body.user)
-  
-  // return tenants;
   res.send(temps)
 
 
 });
+
+
+// this gets a certain instanced document
 
 router.get('/docs/:id', async (req,res) => {
 
     const tenantDB = await switchDB(`${req.params.id}`,DocumentSchemas) 
     const tenantModel = await getDBModel(tenantDB, 'documents')
     const tenants = await tenantModel.find({})
-
-    // console.log(req.body.user)
-    
-    // return tenants;
     res.send(tenants)
 
 
 });
 
-// router.get('/templates', async (req,res) => {
-
-//   const temps = Template.find({})
-
-//   // console.log(req.body.user)
-  
-//   // return tenants;
-//   res.send(temps)
 
 
-// });
-
+// this gets a certain instanced template
 
 router.get('/template/:id/:docname', async (req,res) => {
 
-  
   const temp = await Template.findOne({id: `${req.params.id}`, name : `${req.params.docname}`})
-
-  // console.log(req.body.user)
-  
-  res.send(temp)
-
+  res.send(temp);
 
 });
 

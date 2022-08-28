@@ -19,39 +19,37 @@ export class LoginComponent implements OnInit {
 
 
 
-  loginUserForm : FormGroup;
-  constructor(public apicallService : ApicallService , public router : Router) {
+  loginUserForm: FormGroup;
+  constructor(public apicallService: ApicallService, public router: Router) {
     this.loginUserForm = new FormGroup({
-      email : new FormControl('' , [Validators.email , Validators.required]),
-      password : new FormControl('' , Validators.required)
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', Validators.required)
     })
   }
 
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   OnSubmit() {
     console.log(this.loginUserForm.value)
-    if(this.loginUserForm.valid){
-      this.apicallService.login(this.loginUserForm.value).subscribe((res:any) => {
+    if (this.loginUserForm.valid) {
+      this.apicallService.login(this.loginUserForm.value).subscribe((res: any) => {
         console.log(res)
-        if(res && res['status'] === 'ok' && res['data'] && res['data']['authToken']){
+        if (res && res['status'] === 'ok' && res['data'] && res['data']['authToken']) {
           localStorage.setItem('token', res['data']['authToken'])
           console.log(res['data'].existUser.username)
-          localStorage.setItem('user',res['data'].existUser.username)
+          localStorage.setItem('user', res['data'].existUser.username)
           this.router.navigate(['dashboard'])
         }
-      }
-      , (err)=>{
-        if(err){
+      }, (err) => {
+        if (err) {
           console.log("We have got an error in Login!")
         }
-    })
+      })
     }
   }
 
-  admin(){
+  admin() {
     window.location.href = "http://localhost:3000/admin/login";
   }
 

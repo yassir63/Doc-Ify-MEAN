@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Field } from './field.model';
 import { Document } from './document.model';
 
@@ -26,26 +25,16 @@ export class FormulaireService {
   }
 
   getArticle(id:any,user:any){
-    // console.log(this.path + `/${text}`);
     return this.http.get(this.path + `/${id}` + `/${user}`);
   }
 
   getField(text:string){
-    //console.log(this.path);
    return this.http.get(this.path + `/known/${text}`);
 
  }
 
-
   getTemplate(id:any,docname:any){
     return this.http.get('http://localhost:3000/dashboard/template'+ `/${id}` + `/${docname}`);
-  }
+}
 
-  // putEmployee(emp : Sas){
-  //   return this.http.put(this.path + `/${emp._id}`,emp);
-  // }
-
-  // deleteEmployee(_id : string){
-  //   return this.http.delete(this.path + `/${_id}`);
-  // }
 }

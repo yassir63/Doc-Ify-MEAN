@@ -1,3 +1,7 @@
+
+// database connection used by the Switch Dunction !
+// Pool Connection !
+
 const mongoose = require('mongoose');
 
 
@@ -21,6 +25,8 @@ const mongoOptions = {
         .catch((error) => reject(error))
     })
 }
+
+
     
 
   module.exports = connectDB

@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-
-// mongo will automatically create a model that has the plural noun of our model !
-
 var Template = mongoose.model('Template',{ 
     _id:{type: String} ,
    name:{type: String} ,
@@ -12,6 +9,4 @@ var Template = mongoose.model('Template',{
 });
 
 
-module.exports = {
-   Template
-};
+module.exports = { Template };

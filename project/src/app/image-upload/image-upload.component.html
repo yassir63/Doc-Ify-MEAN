@@ -1,44 +1,13 @@
-
-  <div class="form-group">
-    <input
-      type="file"
-      name="image"
-      class="form-control"
-      ng2FileSelect
-      [uploader]="uploader"
-      accept="image/x-png,image/gif,image/jpeg"
-    />
-    <div *ngIf="alert" class="alert alert-warning mt-2 mb-2" role="alert">
-      The Upload can take longer if there is a lot of text within because it uses machine learning ( OCR ) to extract Text ! Thank you !
-    </div>
-    <button
-    class="btn btn-outline-success mx-2 mt-2 mb-2"
-      type="button"
-      (click)="uploader.uploadAll()"
-      [disabled]="!uploader.getNotUploadedItems().length"
-    >
-      Upload
-    </button>
-
+<div class="form-group">
+  <input type="file" name="image" class="form-control" ng2FileSelect [uploader]="uploader"
+    accept="image/x-png,image/gif,image/jpeg" />
+  <div *ngIf="alert" class="alert alert-warning mt-2 mb-2" role="alert">
+    The Upload can take longer if there is a lot of text within because it uses machine learning ( OCR ) to extract Text
+    ! Thank you !
   </div>
+  <button class="btn btn-outline-success mx-2 mt-2 mb-2" type="button" (click)="uploader.uploadAll()"
+    [disabled]="!uploader.getNotUploadedItems().length">
+    Upload
+  </button>
 
-
-
-
-<!-- <form [formGroup]="myForm" (ngSubmit)="submit()">
-
-
-  <div class="form-group">
-      <label for="file">File</label>
-      <input
-      name="image"
-          formControlName="file"
-          id="file"
-          type="file"
-          class="form-control"
-          (change)="onFileChange($event)">
-
-  </div>
-
-  <button class="btn btn-outline-success mx-2 mt-2 mb-2" [disabled]="myForm.invalid" type="submit">Submit</button>
-</form> -->
+</div>
