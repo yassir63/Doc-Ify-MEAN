@@ -12,7 +12,7 @@ import { FormulaireService } from 'src/app/shared/formulaire.service';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
-export class ArticleComponent implements OnInit, AfterViewInit {
+export class ArticleComponent implements OnInit {
 
 
   data: any | undefined;
@@ -29,8 +29,8 @@ export class ArticleComponent implements OnInit, AfterViewInit {
 
 
 
-  input1 = 'hhh';
-  input2 = 'ffff';
+  input1 = '';
+  input2 = '';
   input3 = '';
   input4 = '';
   input5 = '';
@@ -42,8 +42,8 @@ export class ArticleComponent implements OnInit, AfterViewInit {
 
   nature = [''];
   types = [''];
-  labels = ['id', 'user', 'document_name', 'date_ecriture', 'texte ( put the HTML code )']
-  champs: boolean[] = [false, false, false, false, false]
+  labels = ['id', 'user', 'document_name', 'date_ecriture', 'texte ( Put the HTML code )']
+  champs: boolean[] = [false, false, false, false, false] // these are filled beforehand because each document has some fixed fields before custom ones that we use to define each document such as id and name
 
   select: any[] = [];
 
@@ -68,13 +68,6 @@ export class ArticleComponent implements OnInit, AfterViewInit {
 
 
   constructor(private formBuilder: FormBuilder, private formulaireService: FormulaireService, public route: ActivatedRoute) {
-
-
-  }
-
-
-  ngAfterViewInit() {
-
 
 
   }
@@ -145,11 +138,13 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     this.types[3] = 'date'
     this.types[4] = 'text'
 
-
+// Creates an array for different input types
 
     for (let i = 0; i < this.length; i++) {
       this.types[i + 5] = formValue.value.type[i].input;
     }
+
+// Creates an array for different input natures
 
     for (let i = 0; i < this.length; i++) {
       console.log(formValue.value.type[i].choice)
@@ -159,14 +154,17 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     }
 
 
+// Creates an array for different input labels
+
+
 
     for (let i = 0; i < this.length; i++) {
       this.labels[i + 5] = formValue.value.type[i].label;
     }
 
 
+// Creates a FormArray using the different array created beforehand
 
-    console.log(this.champs)
 
     for (let i = 1; i < this.length + 5; i++) {
       let inputArr = this.articleForm.get('Field') as FormArray;
@@ -210,8 +208,6 @@ export class ArticleComponent implements OnInit, AfterViewInit {
 
 
   onSubmitText(formValue: NgForm) {
-
-    console.log(formValue.value)
     this.document_name = formValue.value.document_name
     this.values[2] = formValue.value.document_name
     this.texte = formValue.value.texte;
@@ -329,12 +325,14 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     }
   }
 
+
+  // View created Document
+
   getDoc(id: string, user: any) {
 
     this.formulaireService.getArticle(id, user).subscribe((data) => {
       this.stg = data;
-      console.log(data)
-
+      
       for (let i = 0; i < this.stg.fields.length; i++) {
         this.texte = this.texte.replace('## ' + this.stg.fields[i].label + ' ##', this.stg.fields[i].value)
       }
@@ -355,7 +353,7 @@ export class ArticleComponent implements OnInit, AfterViewInit {
 
     this.resetForm();
 
-
+// retrieve a document instance on click !
 
     this.route.queryParams
       .subscribe(params => {

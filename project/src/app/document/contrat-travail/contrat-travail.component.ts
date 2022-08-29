@@ -95,8 +95,6 @@ export class ContratTravailComponent implements OnInit {
       this.salarie = this.stg.fields[10].value;
       this.adresse_societe = this.stg.fields[11].value;
 
-
-      console.log(data)
     });
 
     this.view = true;
@@ -127,15 +125,15 @@ export class ContratTravailComponent implements OnInit {
     this.resetForm();
 
 
+    // retrieve a document instance on click !
+
 
     this.route.queryParams
       .subscribe(params => {
         this.view = params['view'] || false;
-        console.log(params['id'])
-
         this.formulaireService.getArticle(params['id'], params['user']).subscribe((data) => {
-          this.stg = data;
 
+          this.stg = data;
           this.id = this.stg.fields[0].value;
           this.user = this.stg.fields[1].value;
           this.document_name = this.stg.fields[2].value;
@@ -148,6 +146,7 @@ export class ContratTravailComponent implements OnInit {
           this.ville_ecriture = this.stg.fields[9].value;
           this.salarie = this.stg.fields[10].value;
           this.adresse_societe = this.stg.fields[11].value;
+
         });
 
 

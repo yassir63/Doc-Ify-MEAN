@@ -87,7 +87,6 @@ export class GeneralComponent implements OnInit {
 
     this.formulaireService.getArticle(id, user).subscribe((data) => {
       this.stg = data;
-      console.log(data)
 
       for (let i = 0; i < this.stg.fields.length; i++) {
         this.texte = this.texte.replace('## ' + this.stg.fields[i].label + ' ##', this.stg.fields[i].value)

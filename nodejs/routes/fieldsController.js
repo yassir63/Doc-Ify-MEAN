@@ -9,7 +9,7 @@ var { Field } = require('../models/fields.js');
 var { Template } = require('../models/template.js');
 const docSchema = require('../models/docSchema.js');
 const Document = mongoose.model('Document', docSchema);
-const DocumentSchemas = new Map(['documents', docSchema]);
+const DocumentSchemas = new Map([['documents', docSchema]]);
 const Docs = ["contrat-travail", "convention-stage"]
 var { MongoClient } = require('mongodb');
 var db;
@@ -79,7 +79,7 @@ router.get('/', (req, res) => {
 
 // gets an instanced document along with its fields
 
-router.get('/:id/:doc', async (req, res) => {
+router.get('/:id/:user', async (req, res) => {
 
 
   const tenantDB = await switchDB(req.params.user, DocumentSchemas) // Project + authUsers

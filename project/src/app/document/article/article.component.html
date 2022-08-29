@@ -50,6 +50,8 @@
 
               </div>
 
+              <!-- Fourth Step -->
+
 
               <div *ngIf="!view && !etape1 && etape2 && !etape3 && !etape4"
                 class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
@@ -79,6 +81,8 @@
 
               </div>
 
+
+              <!-- Third Step -->
 
               <div *ngIf="!view && !etape1 && !etape3 && !etape4 && pdf"
                 class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
@@ -121,6 +125,9 @@
 
               </div>
 
+
+              <!-- Text Modifcation and Submission -->
+
               <div *ngIf="!view && !etape1 && !etape3 && !etape4 && !etape2 && !pdf && edit"
                 class="col s6 mx-3 mt-4 shadow p-2 mb-2 bg-dark rounded d-flex justify-content-center text-center">
 
@@ -152,7 +159,7 @@
 
               </div>
 
-              <!-- Third Step -->
+              <!-- Fifth Step : Input Types -->
 
 
               <div *ngIf="!view && !etape1 && !etape2 && etape3 && !etape4"
@@ -220,7 +227,9 @@
 
                 </form>
               </div>
-              <!-- Fourth Step -->
+
+
+              <!-- Sixth Step : Creation of instance of the template in hand  -->
 
 
               <div *ngIf="!view && !etape1 && !etape2 && !etape3 && etape4"
@@ -307,6 +316,9 @@
 
 
             </div>
+
+
+            <!-- Document -->
 
             <div *ngIf="view && !etape2 && !etape3 && !etape4"
               class=" col s6 mx-3 mt-4 shadow p-2 mb-3 bg-dark rounded">
