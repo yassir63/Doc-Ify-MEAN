@@ -1,0 +1,41 @@
+{
+  "header":{
+    "language": "اللغة",
+    "connexion": "تسجيل الدخول",
+    "inscription": "الانخراط",
+    "entreprise": "الشركات",
+    "travail": "العمل",
+    "famille": "العائلة",
+    "immobilier":"العقار",
+    "juridique":"القانون"
+    },
+    "body":{
+      "convention_stage":"عقد التدريب",
+      "contrat_travail":"عقد العمل"
+    },
+    "login":{
+      "title":"تسجيل الدخول",
+      "email":"البريد الإلكتروني",
+      "password":"كلمه سر",
+      "submit": "تسجيل",
+      "admin":"تسجيل كمسؤول"
+    },
+    "register":{
+      "title":"الانخراط",
+      "username":"اسم المستخدم",
+      "gender":"جنس",
+      "date":"اختر تاريخا",
+      "email":"البريدالإلكتروني",
+      "password":"كلمه سر",
+      "confirmation":"تأكيد كلمة المرور",
+      "submit": "انشاء ",
+      "supprimer":"المسح"
+    },
+    "dashboard":{
+      "greeting":"مرحبا بكم",
+      "templates":"نماذج ",
+      "documents":"مستنداتي",
+      "logout":"تسجيل الخروج",
+      "maketemplate":"إنشاء نماذج "
+      }
+}

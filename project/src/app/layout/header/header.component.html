@@ -11,11 +11,28 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           </ul>
+
+
+          <li class="mx-1 mt-3 mb-3 nav-item dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" i18n>
+              {{'header.language' | translate}}
+            </a>
+            <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item text-light" (click)="useLanguage('fr')" i18n>fr</a></li>
+              <li><a class="dropdown-item text-light" (click)="useLanguage('en')" i18n>eng</a></li>
+              <li><a class="dropdown-item text-light" (click)="useLanguage('ar')" i18n>arabe</a></li>
+            </ul>
+          </li>
+<!--
+          <button (click)="useLanguage('en')">en</button>
+          <button (click)="useLanguage('fr')">fr</button> -->
+<span>||</span>
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button routerLink="/login" class="btn btn-outline-success" type="submit">Connexion</button>
+            <button routerLink="/login" class="btn btn-outline-success" type="submit" i18n>{{'header.connexion' | translate}}</button>
             <span>||</span>
-            <button routerLink="/signup" class="btn btn-outline-danger" type="submit">Inscription</button>
+            <button routerLink="/signup" class="btn btn-outline-danger" type="submit" i18n>{{'header.inscription' | translate}}</button>
           </form>
         </div>
       </div>
@@ -34,23 +51,23 @@
 
           <li class="mx-5 mt-2 mb-3 nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Entreprise
+              aria-expanded="false" i18n>
+              {{'header.entreprise' | translate}}
             </a>
             <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item text-light" href="#">Action</a></li>
-              <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+              <li><a class="dropdown-item text-light" href="#" i18n>Action</a></li>
+              <li><a class="dropdown-item text-light" href="#" i18n>Another action</a></li>
               <li>
                 <hr class="dropdown-divider text-light">
               </li>
-              <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+              <li><a class="dropdown-item text-light" href="#" i18n>Something else here</a></li>
             </ul>
           </li>
 
           <li class="mx-5 mt-2 mb-3 nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Travail
+              aria-expanded="false" i18n>
+              {{'header.travail' | translate}}
             </a>
             <ul class="bg-dark dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item text-light" href="#">Action</a></li>
@@ -65,8 +82,8 @@
 
           <li class=" mx-5 mt-2 mb-3 nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Famille
+              aria-expanded="false" i18n>
+              {{'header.famille' | translate}}
             </a>
             <ul class="bg-dark dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item text-light" href="#">Action</a></li>
@@ -81,8 +98,8 @@
 
           <li class="mx-5 mt-2 mb-3  nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Immobilier
+              aria-expanded="false" i18n>
+              {{'header.immobilier' | translate}}
             </a>
             <ul class="bg-dark dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item text-light" href="#">Action</a></li>
@@ -97,8 +114,8 @@
 
           <li class="mx-5 mt-2 mb-3 nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Juridique
+              aria-expanded="false" i18n>
+              {{'header.juridique' | translate}}
             </a>
             <ul class="bg-dark dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item text-light" href="#">Action</a></li>
@@ -110,6 +127,7 @@
             </ul>
           </li>
         </ul>
+
 
       </div>
     </div>

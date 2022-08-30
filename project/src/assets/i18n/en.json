@@ -1,0 +1,41 @@
+{
+  "header":{
+    "language": "Language",
+    "connexion": "Connect",
+    "inscription": "Register",
+    "entreprise": "Entreprise",
+    "travail": "Work",
+    "famille": "Family",
+    "immobilier":"Real Estate",
+    "juridique":"Legal"
+    },
+    "body":{
+      "convention_stage":"Internship Contract",
+      "contrat_travail":"Work Contract"
+    },
+    "login":{
+      "title":"Login Form",
+      "email":"Email",
+      "password":"Password",
+      "submit": "Connect",
+      "admin":"Connect As Admin"
+    },
+    "register":{
+      "title":"Sign Up",
+      "username":"Username",
+      "gender":"Gender",
+      "date":"Choose A Date",
+      "email":"Email",
+      "password":"Password",
+      "confirmation":"Confirm Password",
+      "submit": "Create",
+      "supprimer":"Reset"
+    },
+    "dashboard":{
+      "greeting":"Welcome to Dashboard, Mr/Mrs",
+      "templates":"Custom Templates",
+      "documents":"My Documents",
+      "logout":"Log Out",
+      "maketemplate":"Make a Template"
+      }
+}

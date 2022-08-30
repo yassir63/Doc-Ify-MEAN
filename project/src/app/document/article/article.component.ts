@@ -19,7 +19,7 @@ export class ArticleComponent implements OnInit {
 
 
 
-  user = localStorage.getItem('user')
+  user = sessionStorage.getItem('user')
   document_name = "";
 
   id = new ObjectID;
@@ -217,7 +217,7 @@ export class ArticleComponent implements OnInit {
   }
 
   onSubmitTextUpload(formValue: NgForm) {
-    this.data = localStorage.getItem('texte');
+    this.data = sessionStorage.getItem('texte');
 
     console.log(this.data)
     formValue.value.texte = this.data;
@@ -232,7 +232,7 @@ export class ArticleComponent implements OnInit {
     this.pdf = false;
     this.edit = true;
 
-    localStorage.removeItem('texte')
+    sessionStorage.removeItem('texte')
 
   }
 
@@ -332,7 +332,7 @@ export class ArticleComponent implements OnInit {
 
     this.formulaireService.getArticle(id, user).subscribe((data) => {
       this.stg = data;
-      
+
       for (let i = 0; i < this.stg.fields.length; i++) {
         this.texte = this.texte.replace('## ' + this.stg.fields[i].label + ' ##', this.stg.fields[i].value)
       }
@@ -347,7 +347,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    localStorage.removeItem('texte');
+    sessionStorage.removeItem('texte');
 
 
 

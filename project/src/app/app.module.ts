@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { FormsModule , NgForm, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // import { ArticleComponent } from './article/article.component';
 import { DocumentComponent } from './document/document.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ConventionStageComponent } from './document/convention-stage/convention-stage.component';
 import { ContratTravailComponent } from './document/contrat-travail/contrat-travail.component';
 import { LoginComponent } from './login/login.component';
@@ -40,13 +40,17 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { FileUploadModule } from 'ng2-file-upload';
 
 
+// Ngx Translate
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     LayoutComponent,
-    // ArticleComponent,
     DocumentComponent,
     ConventionStageComponent,
     ConventionStageComponent,
@@ -70,6 +74,13 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  }),
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
@@ -83,3 +94,6 @@ import { FileUploadModule } from 'ng2-file-upload';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
       this.apicallService.login(this.loginUserForm.value).subscribe((res: any) => {
         console.log(res)
         if (res && res['status'] === 'ok' && res['data'] && res['data']['authToken']) {
-          localStorage.setItem('token', res['data']['authToken'])
+          sessionStorage.setItem('token', res['data']['authToken'])
           console.log(res['data'].existUser.username)
-          localStorage.setItem('user', res['data'].existUser.username)
+          sessionStorage.setItem('user', res['data'].existUser.username)
           this.router.navigate(['dashboard'])
         }
       }, (err) => {

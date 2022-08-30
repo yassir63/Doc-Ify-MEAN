@@ -1,13 +1,13 @@
 <app-header></app-header>
 <div class="container" style="padding-top: 8rem ;">
   <mat-card class="bg-dark">
-    <mat-card-title style="text-align:center;">Sign Up User</mat-card-title>
+    <mat-card-title style="text-align:center;">{{'register.title' | translate}}</mat-card-title>
     <form class="example-form" [formGroup]="UserRegistrationForm" (ngSubmit)="OnSubmit()">
     <div class="row">
       <div class="col-6">
 
           <mat-form-field class="example-full-width" appearance="outline" style="width:100%">
-            <mat-label>UserName</mat-label>
+            <mat-label>{{'register.username' | translate}}</mat-label>
             <input matInput placeholder="UserName" formControlName="username">
           </mat-form-field>
         </div>
@@ -15,7 +15,7 @@
         <div class="col-6">
 
           <mat-form-field class="example-full-width" appearance="outline" style="width:100%">
-            <mat-label>Email</mat-label>
+            <mat-label>{{'register.email' | translate}}</mat-label>
             <input type="email" matInput placeholder="Email" formControlName="email">
           </mat-form-field>
         </div>
@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-6">
           <mat-form-field appearance="outline" style="width:100%">
-            <mat-label>Gender</mat-label>
+            <mat-label>{{'register.gender' | translate}}</mat-label>
             <mat-select formControlName="gender">
               <mat-option *ngFor="let gender of genderValues" [value]="gender.value">
                 {{gender.name}}
@@ -38,8 +38,7 @@
         <div class="col-6">
           <mat-form-field appearance="outline" style="width:100%">
           <mat-label>
-            Choose a Date
-          </mat-label>
+            {{'register.date' | translate}}          </mat-label>
           <input matInput [matDatepicker]="picker" formControlName="dob">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -52,14 +51,14 @@
         <div class="col-6">
 
           <mat-form-field class="example-full-width" appearance="outline" style="width:100%">
-            <mat-label>Password</mat-label>
+            <mat-label>{{'register.password' | translate}}</mat-label>
             <input type="password" matInput placeholder="Password" formControlName="password">
           </mat-form-field>
         </div>
         <div class="col-6">
 
           <mat-form-field class="example-full-width" appearance="outline" style="width:100%">
-            <mat-label>Confirm Password</mat-label>
+            <mat-label>{{'register.confirmation' | translate}}</mat-label>
             <input formControlName="confirmPassword" type="text" matInput placeholder="Confirm Password">
           </mat-form-field>
         </div>
@@ -67,10 +66,10 @@
 
       <div class="row">
         <div class="col-6">
-          <button mat-raised-button style="width:100%" type="submit" color="accent">Submit</button>
+          <button mat-raised-button style="width:100%" type="submit" color="accent">{{'register.submit' | translate}}</button>
         </div>
         <div class="col-6">
-          <button mat-raised-button (click)="clear(UserRegistrationForm)" type="reset" style="width:100%" color="warn">Clear</button>
+          <button mat-raised-button (click)="clear(UserRegistrationForm)" type="reset" style="width:100%" color="warn">{{'register.supprimer' | translate}}</button>
         </div>
       </div>
 

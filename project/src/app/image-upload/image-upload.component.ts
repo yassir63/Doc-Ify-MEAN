@@ -34,7 +34,7 @@ export class ImageUploadComponent implements OnInit {
         console.log(res);
         this.data = res;
         console.log(this.data.content)
-        localStorage.setItem('texte',this.data.content)
+        sessionStorage.setItem('texte',this.data.content)
         alert('Uploaded Successfully.');
 
       })

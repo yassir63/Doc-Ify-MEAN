@@ -1,0 +1,45 @@
+{
+  "demo": {
+      "title": "Demo de Translation",
+      "text": "Ceci est un simple demo en utilisant ngx-translate"
+  },
+  "header":{
+    "language": "Language",
+    "connexion": "Connexion",
+    "inscription": "Inscription",
+    "entreprise": "Entreprise",
+    "travail": "Travail",
+    "famille": "Famille",
+    "immobilier":"Immobilier",
+    "juridique":"Juridique"
+    },
+    "body":{
+      "convention_stage":"Convention De Stage",
+      "contrat_travail":"Contrat De Travail"
+    },
+    "login":{
+      "title":"Forum Login",
+      "email":"Email",
+      "password":"Mot De Passe",
+      "submit": "Se Connecter",
+      "admin":"Se Connecter en Tant qu'Admin"
+    },
+    "register":{
+      "title":"Inscription",
+      "username":"Nom d'Utilisateur",
+      "gender":"Sexe",
+      "date":"Choisir Une Date",
+      "email":"Email",
+      "password":"Mot De Passe",
+      "confirmation":"Confirmer Mot de Passe",
+      "submit": "Créer",
+      "supprimer":"Effacer"
+    },
+    "dashboard":{
+      "greeting":"Bienvenue au Dashboard, Mr/Mlle",
+      "templates":"Templates Personnalisés",
+      "documents":"Mes Documents",
+      "logout":"Se Déconnecter",
+      "maketemplate":"Créer un template"
+      }
+}

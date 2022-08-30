@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ApicallService } from '../shared/apicall.service';
 import { FormulaireService } from '../shared/formulaire.service';
 
@@ -10,16 +11,23 @@ import { FormulaireService } from '../shared/formulaire.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public apicallService: ApicallService, public formulaireService: FormulaireService, public route: Router) {}
+  constructor(public apicallService: ApicallService, public formulaireService: FormulaireService, public route: Router,private translate: TranslateService) {
+    translate.setDefaultLang('fr');
+    translate.use('fr');
+  }
 
-  username = localStorage.getItem('user');
+  useLanguage(language: string): void {
+    this.translate.use(language);
+  }
+
+  username = sessionStorage.getItem('user');
   mesdocs: any = {};
   templates: any = {};
 
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.apicallService.gotoDashboard(localStorage.getItem('token')).subscribe((res: any) => {
+    if (sessionStorage.getItem('token')) {
+      this.apicallService.gotoDashboard(sessionStorage.getItem('token')).subscribe((res: any) => {
         console.log(res)
         if (res && res['status'] === 'ok') {
           console.log("We are In Dashboard !")
@@ -73,8 +81,8 @@ export class DashboardComponent implements OnInit {
 
 
   onLogout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
     this.route.navigate(['login'])
   }
 

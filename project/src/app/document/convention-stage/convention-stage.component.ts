@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ConventionStageComponent implements OnInit {
 
-  user = localStorage.getItem('user')
+  user = sessionStorage.getItem('user')
   document_name = "convention-stage";
   company_name = "";
   company_owner = "";

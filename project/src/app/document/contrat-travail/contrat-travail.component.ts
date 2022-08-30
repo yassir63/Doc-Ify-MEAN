@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ContratTravailComponent implements OnInit {
 
-  user = localStorage.getItem('user')
+  user = sessionStorage.getItem('user')
   document_name = "contrat-travail";
   salarie = "";
   employeur = "";

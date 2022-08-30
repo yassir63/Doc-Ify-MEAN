@@ -11,7 +11,7 @@ import { FormulaireService } from 'src/app/shared/formulaire.service';
 })
 export class GeneralComponent implements OnInit {
 
-  user = localStorage.getItem('user')
+  user = sessionStorage.getItem('user')
 
 
   id = new ObjectID;

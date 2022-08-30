@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import {TranslateService} from "@ngx-translate/core";
+
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,13 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppComponent {
   title = 'Doc-Ify';
-  faCoffee = faCoffee;
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('fr');
+    translate.use('fr');
+  }
+
+
+  useLanguage(language: string): void {
+    this.translate.use(language);
+}
 }
