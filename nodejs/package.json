@@ -11,7 +11,7 @@
   "dependencies": {
     "@adminjs/express": "^5.0.0",
     "@adminjs/mongoose": "^3.0.0",
-    "adminjs": "^6.0.1",
+    "adminjs": "^6.1.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",

@@ -12,6 +12,7 @@ const Document = mongoose.model('Document', docSchema);
 const DocumentSchemas = new Map([['documents', docSchema]]);
 const Docs = ["contrat-travail", "convention-stage"]
 var { MongoClient } = require('mongodb');
+const { isAsyncFunction } = require('util/types');
 var db;
 
 
@@ -48,13 +49,34 @@ const getDBModel = async (db, modelName) => {
 // this gets the diffenrent already established fields in the database such as different nationalities ... 
 
 
+router.get('/getdata' , async (req,res) => {
+
+
+  const url = new MongoClient('mongodb://localhost:27017')
+  await url.connect();
+  const db = url.db('Data')
+
+  const result = await db.listCollections().toArray();
+
+  const data = [];
+
+  for(let i=0;i<result.length;i++){
+    data[i] = result[i].name;
+  }
+
+  res.send(data)
+
+
+})
+
+
 router.get('/known/:collection', async (req, res) => {
 
 
 
   const client = new MongoClient('mongodb://localhost:27017')
   await client.connect();
-  const db = client.db('Projectnew')
+  const db = client.db('Data')
 
   const result = await db.collection(req.params.collection).find({}).toArray();
   res.send(result)

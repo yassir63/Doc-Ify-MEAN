@@ -37,4 +37,8 @@ export class FormulaireService {
     return this.http.get('http://localhost:3000/dashboard/template'+ `/${id}` + `/${docname}`);
 }
 
+getKnownData(){
+  return this.http.get(this.path + `/getdata`);
+}
+
 }

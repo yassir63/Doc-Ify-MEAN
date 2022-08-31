@@ -26,6 +26,7 @@ export class ArticleComponent implements OnInit {
   id_str = this.id.toString();
 
   length = 0;
+  known : any = [];
 
 
 
@@ -214,6 +215,10 @@ export class ArticleComponent implements OnInit {
     this.values[4] = formValue.value.texte;
     this.etape2 = false;
     this.etape3 = true;
+
+    this.formulaireService.getKnownData().subscribe((res) => {
+      this.known = res;
+    })
   }
 
   onSubmitTextUpload(formValue: NgForm) {

@@ -168,6 +168,9 @@
                 <form [formGroup]="inputType">
                   <div class="text-light">
                     Veuillez spécifier le type des inputs que vous souhaitez
+<br>
+                     Si Connu, utilisez les suggestions proposées
+
                   </div>
 
                   <div class="d-flex mb-3" *ngFor="let control of inputType.controls.type['controls']; let i=index"
@@ -202,12 +205,20 @@
                       </div>
 
 
+
+
+
                       <div class="form-group col-xs-6">
                         <div class="form mt-2 mx-2 mb-4">
-                          <input class="form__input" type="text" formControlName="label" />
+                          <input class="form__input" type="text" formControlName="label" matInput [matAutocomplete]="auto" />
                           <label class="form__label">Label</label>
                         </div>
                       </div>
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of known">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
 
 
 

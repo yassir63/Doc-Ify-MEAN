@@ -1,4 +1,4 @@
-# Doc-Ify
+# Doc-Ify - Yassir Amami
 
 # Use Case
 

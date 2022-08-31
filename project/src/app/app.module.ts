@@ -32,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core'
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { ArticleComponent } from './document/article/article.component';
 import { GeneralComponent } from './document/general/general.component';
@@ -88,6 +89,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
+    MatAutocompleteModule,
     FileUploadModule,
   ],
   providers: [],
