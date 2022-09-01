@@ -43,10 +43,9 @@
                   </div>
 
                   <button type="submit" [disabled]="!articleForm.valid" (click)="onSubmit(articleForm)"
-                    class="btn btn-outline-success">Save</button>
-                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">Reset</button>
-                  <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">Voir
-                    Mon Document</button>
+                    class="btn btn-outline-success">{{ 'contrat_travail.save' | translate }}</button>
+                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">{{ 'contrat_travail.reser' | translate }}</button>
+                  <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">{{ 'contrat_travail.seedoc' | translate }}</button>
 
 
                 </form>
@@ -59,10 +58,7 @@
 
               </div>
               <div class=" col s6 mx-3 mt-4 shadow p-2 mb-5 bg-dark rounded">
-                <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">Générer
-                  PDF</button>
-                <span style="padding-left:10px;color:white;">You can modify the following Text as you wish and generate
-                  a PDF ! ( Click anywhere on the file ! )</span>
+                <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">{{ 'contrat_travail.genererpdf' | translate }}</button>
 
                 <div style="margin:10px;" class="scroll form-control">
                   <div style="height:auto; margin:10px;" #article>

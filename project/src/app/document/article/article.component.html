@@ -18,7 +18,7 @@
                 <form #formulaire1="ngForm" class="d-flex justify-content-center align-items-center">
 
                   <div class="text-light">
-                    Veuillez spécifier le nombre d'input que vous souhaitez ( Ne pas dépasser 10 ! )
+                    {{ 'article.input_number' | translate }}
                   </div>
 
                   <div class="form mt-2 mx-2 mb-2">
@@ -26,7 +26,7 @@
                   </div>
                   <div>
                     <button type="submit" (click)="onSubmit1(formulaire1)"
-                      class="btn btn-outline-success mx-2">Next</button>
+                      class="btn btn-outline-success mx-2">{{ 'article.next' | translate }}</button>
                   </div>
                 </form>
               </div>
@@ -42,9 +42,9 @@
 
 
 
-                <button type="submit" (click)="Upload()" class="btn btn-outline-success mx-2">Upload</button>
+                <button type="submit" (click)="Upload()" class="btn btn-outline-success mx-2">{{ 'article.upload' | translate }}</button>
 
-                <button type="submit" (click)="Saisie()" class="btn btn-outline-success mx-2">Saisie</button>
+                <button type="submit" (click)="Saisie()" class="btn btn-outline-success mx-2">{{ 'article.saisie' | translate }}</button>
 
 
 
@@ -61,20 +61,19 @@
                 <form #formulaire2="ngForm" class="justify-content-center align-items-center">
 
                   <div class="text-light">
-                    Veuillez entrer le texte Template en HTML ainsi que les champs voulus sous la forme suivante : ##
-                    label of input ##
+                    {{ 'article.texte_html' | translate }}
                   </div>
                   <div class="form mt-2 mx-2 mb-2 ">
 
                     <input class="form__input" type="text" name="document_name" [(ngModel)]="document_name" />
-                    <label class="form__label">Document Name</label>
+                    <label class="form__label">{{ 'article.docname' | translate }}</label>
                   </div>
                   <div class="form-group mb-2">
                     <textarea class="form-control" name="texte" [ngModel]="texte"></textarea>
                   </div>
 
                   <button type="submit" (click)="onSubmitText(formulaire2)"
-                    class="btn btn-outline-success mx-2">Next</button>
+                    class="btn btn-outline-success mx-2">{{ 'article.next' | translate }}</button>
 
                 </form>
 
@@ -92,22 +91,21 @@
                 <form #formulaire2="ngForm" class="justify-content-center align-items-center">
 
                   <div class="text-light">
-                    Veuillez entrer le texte Template en HTML ainsi que les champs voulus sous la forme suivante : ##
-                    label of input ##
+                    {{ 'article.texte_html' | translate }}
                   </div>
 
                   <div class="form mt-2 mx-2 mb-2 ">
 
                     <input class="form__input" type="text" name="document_name" [(ngModel)]="document_name" />
-                    <label class="form__label">Document Name</label>
+                    <label class="form__label">{{ 'article.docname' | translate }}</label>
                   </div>
 
                   <div class="text-light mb-2">
-                    PDF Upload
+                    {{ 'article.upload_pdf' | translate }}
                   </div>
                   <app-file-upload></app-file-upload>
                   <div class="text-light mb-2">
-                    Image Upload
+                    {{ 'article.upload_image' | translate }}
                   </div>
 
                   <app-image-upload>
@@ -118,7 +116,7 @@
 
 
                   <button type="submit" (click)="onSubmitTextUpload(formulaire2)"
-                    class="btn btn-outline-success mx-2">Next</button>
+                    class="btn btn-outline-success mx-2">{{ 'article.next' | translate }}</button>
 
                 </form>
 
@@ -136,23 +134,21 @@
                 <form #formulaire2="ngForm" class="justify-content-center align-items-center">
 
                   <div class="text-light">
-                    Veuillez chnager le texte Template en HTML à ce que les champs voulus soient sous la forme suivante
-                    : ##
-                    label of input ##
+                    {{ 'article.texte_html2' | translate }}
                   </div>
 
 
                   <div class="form mt-2 mx-2 mb-2 ">
 
                     <input class="form__input" type="text" name="document_name" [value]="values[2]" />
-                    <label class="form__label">Document Name</label>
+                    <label class="form__label">{{ 'article.docname' | translate }}</label>
                   </div>
 
                   <textarea class="form-control" name="texte" [ngModel]="texte" [value]="values[4]"></textarea>
 
 
                   <button type="submit" (click)="onSubmitTextFinal(formulaire2)"
-                    class="btn btn-outline-success mx-2">Next</button>
+                    class="btn btn-outline-success mx-2">{{ 'article.next' | translate }}</button>
 
                 </form>
 
@@ -167,10 +163,10 @@
 
                 <form [formGroup]="inputType">
                   <div class="text-light">
-                    Veuillez spécifier le type des inputs que vous souhaitez
-<br>
-                     Si Connu, utilisez les suggestions proposées
 
+
+<br>
+                    {{ 'article.input_type' | translate }}
                   </div>
 
                   <div class="d-flex mb-3" *ngFor="let control of inputType.controls.type['controls']; let i=index"
@@ -184,21 +180,21 @@
                       <div class="form-group col-xs-6">
                         <div class="form mt-2 mx-2 mb-4">
                           <select formControlName="input" class="form-select btn btn-outline-success btn-lg px-6 ">
-                            <option [ngValue]="type" selected disabled hidden>Type</option>
-                            <option value="text">Texte</option>
-                            <option value="number">Number</option>
-                            <option value="hidden">Hidden</option>
-                            <option value="email">Email</option>
-                            <option value="date">Date</option>
+                            <option [ngValue]="type" selected disabled hidden>{{ 'article.type' | translate }}</option>
+                            <option value="text">{{ 'article.text' | translate }}</option>
+                            <option value="number">{{ 'article.number' | translate }}</option>
+                            <option value="hidden">{{ 'article.hidden' | translate }}</option>
+                            <option value="email">{{ 'article.email' | translate }}</option>
+                            <option value="date">{{ 'article.date' | translate }}</option>
                           </select>
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
                         <div class="form mt-2 mx-2 mb-4">
                           <select formControlName="choice" class="form-select btn btn-outline-success btn-lg px-6 ">
-                            <option [ngValue]="type" selected disabled hidden>Choix</option>
-                            <option value="true">Connu</option>
-                            <option value="false">Libre</option>
+                            <option [ngValue]="type" selected disabled hidden>{{ 'article.choice' | translate }}</option>
+                            <option value="true">{{ 'article.known' | translate }}</option>
+                            <option value="false">{{ 'article.free' | translate }}</option>
 
                           </select>
                         </div>
@@ -211,7 +207,7 @@
                       <div class="form-group col-xs-6">
                         <div class="form mt-2 mx-2 mb-4">
                           <input class="form__input" type="text" formControlName="label" matInput [matAutocomplete]="auto" />
-                          <label class="form__label">Label</label>
+                          <label class="form__label">{{ 'article.label' | translate }}</label>
                         </div>
                       </div>
                       <mat-autocomplete #auto="matAutocomplete">
@@ -234,7 +230,7 @@
 
 
                   <button type="submit" (click)="onSubmit2(inputType)"
-                    class="btn btn-outline-success mx-2">Next</button>
+                    class="btn btn-outline-success mx-2">{{ 'article.next' | translate }}</button>
 
                 </form>
               </div>
@@ -258,23 +254,23 @@
                       <div class="form-group col-xs-6">
                         <div class="form mt-2 mx-2 mb-4">
                           <input class="form__input" type="text" formControlName="label" />
-                          <label class="form__label">Label</label>
+                          <label class="form__label">{{ 'article.label' | translate }}</label>
                         </div>
                       </div>
                       <div class="form-group col-xs-6">
                         <div class="form mt-2 mx-2 mb-4">
                           <select formControlName="type" (change)=onSelect()
                             class="form-select btn btn-outline-success btn-lg px-6 ">
-                            <option [ngValue]="type" selected disabled hidden>Type</option>
-                            <option value="free">Libre</option>
-                            <option value="known">Connu</option>
+                            <option [ngValue]="type" selected disabled hidden>{{ 'article.type' | translate }}</option>
+                            <option value="free">{{ 'article.free' | translate }}</option>
+                            <option value="known">{{ 'article.known' | translate }}</option>
                           </select>
                         </div>
                       </div>
                       <div class="form-group col-xs-6" *ngIf="!champs[i]">
                         <div class="form mt-2 mx-2 mb-4">
                           <input class="form__input" type="{{types[i]}}" formControlName="value" />
-                          <label class="form__label">Value</label>
+                          <label class="form__label">{{ 'article.value' | translate }}</label>
                         </div>
                       </div>
                       <div class="form-group col-xs-6" *ngIf="champs[i]">
@@ -290,7 +286,7 @@
                       <div class="form-group col-xs-6">
                         <div class="form mt-2 mx-2 mb-4">
                           <input class="form__input" type="text" formControlName="nature" />
-                          <label class="form__label">Nature</label>
+                          <label class="form__label">{{ 'article.nature' | translate }}</label>
                         </div>
                       </div>
 
@@ -309,8 +305,8 @@
 
 
                   <button type="submit" [disabled]="!articleForm.valid" (click)="onSubmit(articleForm)"
-                    class="btn btn-outline-success mx-2">Save</button>
-                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">Reset</button>
+                    class="btn btn-outline-success mx-2">{{ 'article.save' | translate }}</button>
+                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">{{ 'article.reset' | translate }}</button>
 
                   <br>
                   <br>
@@ -319,8 +315,7 @@
                   <br>
                   <br>
 
-                  <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">Voir
-                    Mon Document</button> -->
+                  <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">{{ 'article.seedoc' | translate }}</button> -->
                 </form>
 
               </div>
@@ -333,10 +328,8 @@
 
             <div *ngIf="view && !etape2 && !etape3 && !etape4"
               class=" col s6 mx-3 mt-4 shadow p-2 mb-3 bg-dark rounded">
-              <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">Générer
-                PDF</button>
-              <span style="padding-left:10px;color:white;">Please paste your HTML Code Here ! / You can modify the
-                following Text as you wish and generate a PDF ! ( Click anywhere on the file ! )</span>
+              <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">{{ 'article.genererpdf' | translate }}</button>
+              <span style="padding-left:10px;color:white;">{{ 'article.pdf' | translate }}</span>
 
               <div style="margin:10px;" class="scroll form-control">
                 <div style="height:auto; margin:10px;" #article>

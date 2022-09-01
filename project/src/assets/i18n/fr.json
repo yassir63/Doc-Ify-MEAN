@@ -41,5 +41,60 @@
       "documents":"Mes Documents",
       "logout":"Se Déconnecter",
       "maketemplate":"Créer un template"
+      },
+      "file_upload":{
+        "submit":"Envoyer"
+      },
+      "image_upload":{
+        "upload":"Envoyer",
+        "warning":"L'upload pourra prendre plus de temps que normale vu l'utilisation de l'OCR pour l'extraction du texte"
+      },
+      "article":{
+        "input_number":"Veuillez spécifier le nombre d'input que vous souhaitez !",
+        "next":"Suivant",
+        "upload":"Upload",
+        "saisie":"Saisie",
+        "texte_html":"Veuillez entrer le texte Template en HTML ainsi que les champs voulus sous la forme suivante : ## label de l'input ##",
+        "texte_html2":"Veuillez changer le texte Template en HTML à ce que les champs voulus soient sous la forme suivante : ## label de l'input ##",
+        "docname":"Nom Du Document",
+        "upload_image":"Upload Image",
+        "upload_pdf":"Upload PDF",
+        "input_type":"Veuillez spécifier le type des inputs que vous souhaitez",
+        "input_suggestions":"Si Connu, utilisez les suggestions proposées",
+        "type":"Type",
+        "choice":"Choix",
+        "text":"Texte",
+        "number":"Nombre",
+        "hidden":"Caché",
+        "email":"Email",
+        "date":"Date",
+        "known":"Connu",
+        "free":"Libre",
+        "label":"Label",
+        "value":"Valeur",
+        "nature":"Nature",
+        "save":"Enregistrer",
+        "reset":"Reset",
+        "seedoc":"Voir Mon Document",
+        "pdf":"Vous pouvez modifier le texte suivant comme vous voulez juste en appuiyant dessus et générer le PDF instantanément !",
+        "genererpdf":"Générer un PDF !"
+      },
+      "general":{
+        "save":"Enregistrer",
+        "reset":"Reset",
+        "seedoc":"Voir Mon Document",
+        "genererpdf":"Générer un PDF !"
+      },
+      "convention_stage":{
+        "save":"Enregistrer",
+        "reset":"Reset",
+        "seedoc":"Voir Mon Document",
+        "genererpdf":"Générer un PDF !"
+      },
+      "contrat_travail":{
+        "save":"Enregistrer",
+        "reset":"Reset",
+        "seedoc":"Voir Mon Document",
+        "genererpdf":"Générer un PDF !"
       }
 }

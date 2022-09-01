@@ -2,12 +2,11 @@
   <input type="file" name="image" class="form-control" ng2FileSelect [uploader]="uploader"
     accept="image/x-png,image/gif,image/jpeg" />
   <div *ngIf="alert" class="alert alert-warning mt-2 mb-2" role="alert">
-    The Upload can take longer if there is a lot of text within because it uses machine learning ( OCR ) to extract Text
-    ! Thank you !
+    {{ 'image_upload.warning' | translate }}
   </div>
   <button class="btn btn-outline-success mx-2 mt-2 mb-2" type="button" (click)="uploader.uploadAll()"
     [disabled]="!uploader.getNotUploadedItems().length">
-    Upload
+    {{ 'image_upload.upload' | translate }}
   </button>
 
 </div>

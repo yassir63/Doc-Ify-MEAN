@@ -37,5 +37,60 @@
       "documents":"My Documents",
       "logout":"Log Out",
       "maketemplate":"Make a Template"
+      },
+      "file_upload":{
+        "submit":"Submit"
+      },
+      "image_upload":{
+        "upload":"Upload",
+        "warning":"The Upload might take more time than usual because of the use of OCR for text extraction !"
+      },
+      "article":{
+        "input_number":"Specify The number of inputs !",
+        "next":"Next",
+        "upload":"Upload",
+        "saisie":"Typing",
+        "texte_html":"Please, submit the HTML text and the fields wanted in the following form : ## label of input ##",
+        "texte_html2":"Please Modify your HTML Text in a way that fields are in the following form : ## label of input ##",
+        "docname":"Document Name",
+        "upload_image":"Image Upload",
+        "upload_pdf":"PDF Upload",
+        "input_type":"Specify the Type of your inputs",
+        "input_suggestions":"If known, please consider the suggestions !",
+        "type":"Type",
+        "choice":"Choice",
+        "text":"Text",
+        "number":"Number",
+        "hidden":"Hidden",
+        "email":"Email",
+        "date":"Date",
+        "known":"Known",
+        "free":"Free",
+        "label":"Label",
+        "value":"Value",
+        "nature":"Nature",
+        "save":"Save",
+        "reset":"Reset",
+        "seedoc":"See my Document",
+        "pdf":"You can modify the text down below as you wish and generate a PDF instantly ( Click on the TextArea ) !",
+        "genererpdf":"Generate PDF !"
+      },
+      "general":{
+        "save":"Save",
+        "reset":"Reset",
+        "seedoc":"See my Document",
+        "genererpdf":"Generate PDF !"
+      },
+      "convention_stage":{
+        "save":"Save",
+        "reset":"Reset",
+        "seedoc":"See my Document",
+        "genererpdf":"Generate PDF !"
+      },
+      "contrat_travail":{
+        "save":"Save",
+        "reset":"Reset",
+        "seedoc":"See my Document",
+        "genererpdf":"Generate PDF !"
       }
 }

@@ -46,18 +46,16 @@
 
 
                   <button type="submit" [disabled]="!articleForm.valid" (click)="onSubmit(articleForm)"
-                    class="btn btn-outline-success">Save</button>
-                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">Reset</button>
-                  <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">Voir
-                    Mon Document</button>
+                    class="btn btn-outline-success">{{ 'convention_stage.save' | translate }}</button>
+                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">{{ 'convention_stage.reset' | translate }}</button>
+                  <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">{{ 'convention_stage.seedoc' | translate }}</button>
 
 
                 </form>
               </div>
               <div [ngStyle]="{'width' : view ? ' 680pt' : '380pt'}"
                 class=" col s6 mx-3 mt-4 shadow p-2 mb-3 bg-dark rounded">
-                <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">Générer
-                  PDF</button>
+                <button type="submit" *ngIf="view" (click)="generatePDF()" class="btn btn-outline-danger">{{ 'convention_stage.genererpdf' | translate }}</button>
 
 
                 <div style="margin:10px;" class="scroll form-control">
