@@ -224,7 +224,7 @@ export class ArticleComponent implements OnInit {
   onSubmitTextUpload(formValue: NgForm) {
     this.data = sessionStorage.getItem('texte');
 
-    console.log(this.data)
+    // console.log(this.data)
     formValue.value.texte = this.data;
     console.log(formValue.value)
     this.document_name = formValue.value.document_name
@@ -275,6 +275,7 @@ export class ArticleComponent implements OnInit {
 
   onSubmit(formValue: FormGroup) {
     this.formulaireService.postTemplate(formValue.value).subscribe((res) => {
+      // this.artcleform.value
 
       this.resetForm(formValue);
       this.saved = true;

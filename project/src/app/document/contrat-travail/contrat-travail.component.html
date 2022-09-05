@@ -44,7 +44,7 @@
 
                   <button type="submit" [disabled]="!articleForm.valid" (click)="onSubmit(articleForm)"
                     class="btn btn-outline-success">{{ 'contrat_travail.save' | translate }}</button>
-                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">{{ 'contrat_travail.reser' | translate }}</button>
+                  <button type="submit" (click)="resetForm(articleForm)" class="btn btn-outline-danger">{{ 'contrat_travail.reset' | translate }}</button>
                   <button type="submit" *ngIf="saved" (click)="getDoc(id_str,user)" class="btn btn-outline-warning">{{ 'contrat_travail.seedoc' | translate }}</button>
 
 
